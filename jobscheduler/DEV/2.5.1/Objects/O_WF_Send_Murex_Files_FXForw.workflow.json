@@ -1,0 +1,100 @@
+{
+  "TYPE" : "Workflow",
+  "version" : "1.1.0",
+  "timeZone" : "Europe/Budapest",
+  "title" : "Workflow for Sending Murex FX Forward files to business",
+  "orderPreparation" : {
+    "parameters" : {
+      "murex_offset" : {
+        "type" : "Number",
+        "default" : "0"
+      }
+    },
+    "allowUndeclared" : false
+  },
+  "jobResourceNames" : [ "C_JR_Common" ],
+  "instructions" : [ {
+    "TYPE" : "Execute.Named",
+    "jobName" : "Operations_CheckAndPrepare_Murex_Out_FxForwards",
+    "label" : "O_JB_Send_MOF"
+  }, {
+    "TYPE" : "If",
+    "predicate" : "$returnCode == 5",
+    "then" : {
+      "instructions" : [ {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Send_Murex_Out_FxForwards",
+        "label" : "O_JB_Send_Email"
+      } ]
+    }
+  } ],
+  "jobs" : {
+    "Operations_CheckAndPrepare_Murex_Out_FxForwards" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "ShellScriptExecutable",
+        "script" : "prepare_murex_out_file() {\n    offset=$(($1))\n    echo \" \"\n    echo \"=================================================================================================\"\n    echo \"Preparing Murex Out Arhive for Sending\"\n    echo \"=================================================================================================\"\n    echo \"Offset: ${offset}\"\n    found=1\n    echo \"File found: ${found}\"\n    echo \"f_f=${found}\" >> $JS7_RETURN_VALUES\n    echo \"=================================================================================================\"\n\n    #offset=$murex_offset\n    # get current date\n    d=$(date --date \"-${offset} days\" +%Y%m%d)\n\n    # get year\n\n    yyyy=\"${d:0:4}\"\n\n    #get month\n\n    mm=\"${d:4:2}\"\n    \n    #get date\n    \n    dd=\"${d:6:2}\"\n    \n    # Create file name prefix\n    att_name_prefix=\"MDR_to_Murex_Fwdpoints_${yyyy}-${mm}-${dd}.csv\"\n    archive_name=\"MDR_to_Murex_Fwdpoints_${yyyy}-${mm}-${dd}.zip\"\n    datum=\"${dd}.${mm}.${yyyy}\"\n    \n    echo ${att_name_prefix}\n    \n    # set source folder\n    source_folder=\"/edmfs/transfers/sftpuser/pub/interfaces/murex_out/murex_fwdpoints/done\"\n    \n    echo \"Searching for a latest file with prefix \\\"${att_name_prefix}\\\" in the folder ${source_folder}\"\n    \n    if  test $(find \"${source_folder}\" -type f -name \"${att_name_prefix}*\" | wc -c) -gt 0; then\n        found_file=1\n        echo \"found=1\" >> $JS7_RETURN_VALUES\n        echo \"Latest file with the prefix \\\"${att_name_prefix}\\\" found in the folder ${source_folder}: ${file}\"\n        file=$(find \"${source_folder}\" -type f -name \"${att_name_prefix}*\" -printf \"%T@ %f\\n\" | sort -nr | sed 's/^.* //; q;')\n        new_file_name=\"${file%.*}\"\n        echo \"File name in the archive will be: ${new_file_name}\"\n        echo \"Archive name will be: ${archive_name}\"\n        cd ${source_folder}\n        cp  ${file} ${new_file_name}\n        zip ${archive_name} ${new_file_name}\n        rm ${new_file_name}\n        file_path=\"${source_folder}/${archive_name}\"\n        echo \"Attachment: ${file_path}\"\n        echo \"Found: ${found_file}\"\n        echo \"File found: ${found}\"\n\t\techo \"f_f=${found}\" >> $JS7_RETURN_VALUES\n\t\techo \"Attachment file: ${source_folder}/${archive_name}\"\n        echo \"att=${source_folder}/${archive_name}\" >> $JS7_RETURN_VALUES\n        subject=\"MDR+ Murex Out Fwdpoints File for ${dd}.${mm}.${yyyy}\"\n        echo \"Subject: ${subject}\"\n        echo \"sub=${subject}\" >> $JS7_RETURN_VALUES\n\t\texit 5\n    else\n        echo \"File with the prefix: ${att_name_prefix} not found in the folder ${source_folder}\"\n    fi\n\t\n\techo \"=================================================================================================\"\n\techo \"End of preparation job\"\n\techo \"=================================================================================================\"\n}\n\nprepare_murex_out_file  $murex_offset",
+        "env" : {
+          "murex_offset" : "$murex_offset"
+        },
+        "v1Compatible" : false,
+        "returnCodeMeaning" : {
+          "success" : [ 0, 5 ]
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "jobResourceNames" : [ "C_JR_Common" ],
+      "title" : "Operations_CheckAndPrepare_Murex_Out_FxForwards",
+      "notification" : {
+        "types" : [ "ERROR", "WARNING" ],
+        "mail" : {
+          "to" : "mdrplussupport@commerzbank.com",
+          "cc" : "afa55d54.Commerzbank.onmicrosoft.com@emea.teams.ms"
+        }
+      }
+    },
+    "Operations_Send_Murex_Out_FxForwards" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.mail.MailJob",
+        "arguments" : {
+          "to" : "\"tomas.cigan@commerzbank.com;richa.kochhal@commerzbank.com;christoph.riethmueller@partner.commerzbank.com\"",
+          "mail.smtp.host" : "\"mrelay.zit.commerzbank.com\"",
+          "from" : "\"mdrplussupport@commerzbank.com\"",
+          "attachment" : "$att",
+          "content_type" : "\"text/html\"",
+          "body" : "\"Dear colleagues,<br />Please find attached ${sub}.<br /><br />\\n<hr size=1 width=\\\"100%\\\" noshade style='color:#FFC000' align=left>\\nBest regards,<br />\\n<strong>MDR+ DevOps Team</strong><br /><br />\\n<i><small>This email is automatically generated and sent by MDR+ job scheduler.<br />\\nIf you do not want to receive it please request from <a href=\\\"mailto:mdrplussupport@commerzbank.com\\\"><span style='color:#0563C1'>MDR+ DevOps Team</span></a> to remove you from the list of receipients.<small></i>\\n\"",
+          "subject" : "$sub",
+          "cc" : "\"mdrplussupport@commerzbank.com;richard.crapnell@commerzbank.com\"",
+          "mail.smtp.starttls.enable" : "true",
+          "mail.smtp.ssl.enable" : "false",
+          "mail.smtp.ssl.protocols" : "\"TLSv1.2\"",
+          "mail.smtp.port" : "25",
+          "mail.smtp.ssl.trust" : "\"*\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "jobResourceNames" : [ "C_JR_Common" ],
+      "title" : "Operations_Send_Murex_Out_FxForwards",
+      "documentationName" : "MailJob",
+      "notification" : {
+        "types" : [ "ERROR", "WARNING" ],
+        "mail" : {
+          "to" : "mdrplussupport@commerzbank.com",
+          "cc" : "afa55d54.Commerzbank.onmicrosoft.com@emea.teams.ms"
+        }
+      }
+    }
+  }
+}

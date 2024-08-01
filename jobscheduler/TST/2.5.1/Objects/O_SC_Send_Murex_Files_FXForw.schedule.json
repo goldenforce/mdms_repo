@@ -1,0 +1,16 @@
+{
+  "version" : "1.4.0",
+  "workflowNames" : [ "O_WF_Send_Murex_Files_FXForw" ],
+  "title" : "Schedule for sending Murex FXForw files to business",
+  "submitOrderToControllerWhenPlanned" : true,
+  "planOrderAutomatically" : true,
+  "calendars" : [ {
+    "calendarName" : "O_CL_Send_Murex_Files_FXForw",
+    "timeZone" : "Europe/Belgrade",
+    "periods" : [ {
+      "singleStart" : "17:45:00",
+      "whenHoliday" : "SUPPRESS"
+    } ]
+  } ],
+  "orderParameterisations" : [ ]
+}

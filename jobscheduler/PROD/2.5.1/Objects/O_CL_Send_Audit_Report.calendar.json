@@ -1,0 +1,14 @@
+{
+  "version" : "1.5.0",
+  "type" : "WORKINGDAYSCALENDAR",
+  "title" : "Calendar for Sending Audit Report to PO",
+  "from" : "2023-01-01",
+  "to" : "2049-12-31",
+  "includes" : {
+    "weekdays" : [ {
+      "from" : "2023-01-01",
+      "to" : "2049-12-31",
+      "days" : [ 1, 2, 3, 4, 5 ]
+    } ]
+  }
+}

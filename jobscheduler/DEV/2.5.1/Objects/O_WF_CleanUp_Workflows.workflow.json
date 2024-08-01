@@ -1,0 +1,120 @@
+{
+  "TYPE" : "Workflow",
+  "version" : "1.1.0",
+  "timeZone" : "Europe/Budapest",
+  "title" : "Workflow for Cleaning Up Workflow Instances",
+  "orderPreparation" : {
+    "parameters" : {
+      "hibernate_configuration_file" : {
+        "type" : "String",
+        "default" : "'/edmfs/transfers/audit/config/hibernate.cfg.xml'"
+      }
+    },
+    "allowUndeclared" : false
+  },
+  "instructions" : [ {
+    "TYPE" : "Try",
+    "try" : {
+      "instructions" : [ {
+        "TYPE" : "AddOrder",
+        "workflowName" : "M_WF_Send_Monitoring_Email",
+        "arguments" : {
+          "subject" : "\"Workflows Instances Cleaning Up: Started\"",
+          "body" : "\"The task for cleaning up all workflow instances have been started.\""
+        },
+        "remainWhenTerminated" : false
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_CleanUp_Workflows_Prepare_Configuration",
+        "label" : "O_CW_PC"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_CleanUp_Workflows",
+        "label" : "O_CW"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_CleanUp_Workflows_Revert_Configuration",
+        "label" : "O_SAR_RC"
+      }, {
+        "TYPE" : "AddOrder",
+        "workflowName" : "M_WF_Send_Monitoring_Email",
+        "arguments" : {
+          "subject" : "\"Workflows Instances Cleaning Up: DONE\"",
+          "body" : "\"The task for cleaning up all workflow instances have been completed.\""
+        },
+        "remainWhenTerminated" : false
+      } ]
+    },
+    "catch" : {
+      "instructions" : [ {
+        "TYPE" : "Finish",
+        "unsuccessful" : true
+      } ]
+    }
+  } ],
+  "jobs" : {
+    "Operations_CleanUp_Workflows_Prepare_Configuration" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "ShellScriptExecutable",
+        "script" : "cd /edmfs/transfers/audit/config\nsed -i 's/dbpassword/'\"${DatabaseOwner_Password}\"'/g' hibernate.cfg.xml",
+        "v1Compatible" : false
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "title" : "Operations_CleanUp_Workflows_Prepare_Configuration",
+      "notification" : {
+        "types" : [ "ERROR", "WARNING" ],
+        "mail" : {
+          "to" : "mdrplussupport@commerzbank.com",
+          "cc" : "afa55d54.Commerzbank.onmicrosoft.com@emea.teams.ms"
+        }
+      }
+    },
+    "Operations_CleanUp_Workflows" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.db.SQLExecutorJob",
+        "arguments" : {
+          "command" : "\"CALL edm_881_gc.ft_p_workflowcleanup();\"",
+          "hibernate_configuration_file" : "$hibernate_configuration_file"
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "title" : "Operations_CleanUp_Workflows",
+      "documentationName" : "SQLExecutorJob"
+    },
+    "Operations_CleanUp_Workflows_Revert_Configuration" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "ShellScriptExecutable",
+        "script" : "cd /edmfs/transfers/audit/config\nsed -i 's/'\"${DatabaseOwner_Password}\"'/dbpassword/g' hibernate.cfg.xml",
+        "v1Compatible" : false
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "title" : "Operations_CleanUp_Workflows_Revert_Configuration",
+      "notification" : {
+        "types" : [ "ERROR", "WARNING" ],
+        "mail" : {
+          "to" : "mdrplussupport@commerzbank.com",
+          "cc" : "afa55d54.Commerzbank.onmicrosoft.com@emea.teams.ms"
+        }
+      }
+    }
+  }
+}
