@@ -1,7 +1,7 @@
 {
   "version" : "1.4.0",
   "workflowNames" : [ "O_WF_Send_Murex_Files_FXForw" ],
-  "title" : "Schedule for sending Murex FXForw files to business",
+  "title" : "Schedule for sending Murex FXForw files to business TESTING PURPOSE",
   "submitOrderToControllerWhenPlanned" : true,
   "planOrderAutomatically" : true,
   "calendars" : [ {
