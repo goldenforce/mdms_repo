@@ -4,54 +4,19 @@ pipeline{
             label "${labelSelect}"
         }
     }
-    environment {
-        tfvars="$HOME/EnterpriseApplications/terraform/${cloud}/edm_setup/env/${env_variable_file}"
-        configFile="$HOME/Delta/config/jbossstandalone/Configuration.xml"
-        configFileTemplate="$HOME/Delta/config/jbossstandalone/Configuration_Template.xml"
-        startStopFileloading="$HOME/EnterpriseApplications/terraform/${cloud}/helm_edm/edm-applications/scripts/edm/software/ServerScripts/startStopFileloading.properties"
-        startStopPublishing="$HOME/EnterpriseApplications/terraform/${cloud}/helm_edm/edm-applications/scripts/edm/software/ServerScripts/startStopPublishing.properties"
-	    startStopGSOService="$HOME/EnterpriseApplications/terraform/${cloud}/helm_edm/edm-applications/scripts/edm/software/ServerScripts/startStopGSOService.properties"
-        ApplicationProp="$HOME/EnterpriseApplications/terraform/${cloud}/helm_edm/edm-applications/scripts/edm/software/ApplicationConfigurations/Application.properties"
-        EDMAProp="$HOME/EnterpriseApplications/terraform/${cloud}/helm_edm/edm-applications/scripts/edm/software/ApplicationConfigurations/EDMA.properties"
-    }
     stages {
-        stage('svn Export'){
-        when { expression { "${svnExport}" == 'true' } }            
-            steps{
-                script{
-                    if ("${rerun}" == 'false'){               
-                    sh '''
-					 cd $HOME
-					 rm -rf $HOME/Delta/
-					 rm -rf $HOME/EnterpriseApplications/
-					 svn export --non-interactive --no-auth-cache --username=cmuser --password=thanos@789 --force http://svn/AutomatedBuildAndDeployment/tags/EnterpriseApplicationsAndDelta/"${tag}"/Delta
-					 svn export --non-interactive --no-auth-cache --username=cmuser --password=thanos@789 --force http://svn/AutomatedBuildAndDeployment/tags/EnterpriseApplicationsAndDelta/"${tag}"/EnterpriseApplications
-					 svn export --non-interactive --no-auth-cache --username=cmuser --password=thanos@789 --force http://svn/dev/gsinternal/cloud/Pipeline/Clients/"${client_name}"/"${client_name}"_configurations/"${env_variable_file}" ${tfvars}
-					 svn export --non-interactive --no-auth-cache --username=cmuser --password=thanos@789 --force http://svn/dev/gsinternal/cloud/Pipeline/Clients/"${client_name}"/"${client_name}"_configurations/Configuration.xml ${configFile}
-					 chmod +x $HOME/EnterpriseApplications/shell_scripts/*
-                    '''
-                    }   
-                }  
-            }
-        }
-        stage('Download Installers') {
-        when { expression { "${downloadInstallers}" == 'true' } }           
-			steps{
-                script
-				{
-				   sh '''
-					rm -rf $HOME/temp
-					mkdir -p $HOME/temp
-					cd $HOME/temp
-					curl -X GET http://ingsrepo:8082/artifactory/Dev/cloud/"${edm_version}"/"${env_variable}"/EnterpriseApplications/installer_goldensource.zip -H 'Content-Type:application/octet-stream' -o installer_goldensource.zip -u "admin:P@ssw0rd1"
-					unzip installer_goldensource.zip
-					rm -rf $HOME/EnterpriseApplications/installer_goldensource
-					rm -rf installer_goldensource.zip
-					cp -r installer* $HOME/EnterpriseApplications/
-					rm -rf $HOME/temp                        
-				   '''
-				}
+		stage('Checkout code') {
+		  steps {
+			script {
+			  // Checkout the repository and save the resulting metadata
+			  checkout([
+				$class: 'GitSCM',
+				branches: [[name: "*/${branch_name}"]],
+				credentialsId: '423a63a0-04a3-4e1c-806f-e7f41f0a9847',
+				userRemoteConfigs: [[url: ‘https://github.com/goldenforce/mdms_repo.git’]]
+			  ])
 			}
+		  }
 		}		
     }
 }
