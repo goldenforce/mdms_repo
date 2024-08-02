@@ -1,0 +1,16 @@
+{
+  "version" : "1.4.0",
+  "workflowNames" : [ "O_WF_Consolidate_Archive" ],
+  "title" : "Schedule for Archive Consolidation workflow",
+  "submitOrderToControllerWhenPlanned" : true,
+  "planOrderAutomatically" : true,
+  "calendars" : [ {
+    "calendarName" : "O_CL_Consolidate_Archive",
+    "timeZone" : "Europe/Belgrade",
+    "periods" : [ {
+      "singleStart" : "17:30:00",
+      "whenHoliday" : "SUPPRESS"
+    } ]
+  } ],
+  "orderParameterisations" : [ ]
+}
