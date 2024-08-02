@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PackageDescription xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:noNamespaceSchemaLocation="PackageDescription.xsd">
+  <Package type="full" name="Mapping Designer" version="8.8.1.06">
+    <Description/>
+    <Component>Mapping Designer</Component>
+    <Content>
+      <File type="Package" path="features/com.thegoldensource.mappingdesigner.ui_8.8.1.06.jar"/>
+      <File type="Package" path="plugins/com.thegoldensource.mapping.design.core_8.8.1.06.jar"/>
+      <File type="Package" path="plugins/com.thegoldensource.mapping.design.ui_8.8.1.06.jar"/>
+      <File type="Other" path="site.xml"/>
+      <File type="ReleaseNotes" path="ReleaseNotes.html"/>
+    </Content>
+  </Package>
+  <Deployment>
+    <Prerequisites>
+      <Product type="GOLDENSOURCE" name="GoldenSource Workbench">
+        <Version min="8.8.1.05"/>
+      </Product>
+      <Product type="GOLDENSOURCE" name="Base Components">
+      	<Version min="8.8.1.04"/>
+      </Product>
+      <Product type="GOLDENSOURCE" name="Message Translator">
+      	<Version min="8.8.1.01"/>
+      </Product>
+      <Product type="GOLDENSOURCE" name="Business Entity Translator">
+      	<Version min="8.8.1.01"/>
+      </Product>
+      <Product type="GOLDENSOURCE" name="Orchestrator">
+      	<Version min="8.8.1.11"/>
+      </Product>
+    </Prerequisites>
+  </Deployment>
+</PackageDescription>

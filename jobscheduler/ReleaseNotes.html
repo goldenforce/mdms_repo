@@ -1,0 +1,345 @@
+
+
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="X-UA-Compatible" content="IE=Edge" /><meta charset="UTF-8">
+
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<link   rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<title>GoldenSource Release Notes</title>
+	</head>
+	<body>
+	<div class="row-fluid">
+		<div class="span9 col-md-9">
+			<h2 class="page_title">Mapping Designer Release Note Version 8.8.1.06</h2>
+		</div>
+		<div class="span3 col-md-3">
+			<div class="Release_Notes_Logo"></div>
+		</div>
+	</div>
+	<div style="clear:both"/>
+	<hr />
+	
+	<div class="toc">
+		<h3>Table of Contents</h3>
+		<ul class="gs_toc">
+			<li><a href="#intro">Introduction</a></li>
+			<li><a href="#install">Installation Instructions</a></li>
+			
+				<li><a href="#migscript">Migrations Script	</a></li>
+			
+			
+			
+			
+			
+			<li><a href="#changes">Changes Done for 8.8.1.06</a></li>
+		</ul>
+	</div>
+	<div style="clear:both" />
+		<hr /><a name="intro"></a>
+		<div class="desc">
+			<div class="intro"><h3>Introduction</h3><p>Mapping Designer is a tool used for creating connections. It is based on eclipse framework and plugging into the GoldenSource Workbench. It supports the MDX (Mapping Definition Extended) format. It also has the feature to convert the old MSF connections into MDX.</p></div>
+			<a name="install"></a>
+			<hr/>
+			<div class="intro"><h3>Installation Instructions</h3><p>For a detailed installation description refer to chapter "Install GoldenSource Workbench and PlugIns" of the "GoldenSource Enterprise Installation Guide".</p></div>
+			
+			
+			
+			
+			
+			<!-- Migration Scripts  -->
+			<hr/>
+			<a name="migscript"></a>
+			<div class="intro">
+				<h3>Migration Scripts</h3>
+				<table class="table table-condensed stripe data_table" id="tblMilestoneAll">
+					<thead>
+						<tr><th>Milestone</th>
+							<th>JIRA</th>
+							<th>GT</th>
+							<th>FO</th>
+							<th>Migration Scripts</th>
+							<th>Description</th>
+							<th>Notes</th>
+							<th>Tables Affected</th>
+							<th>Supported Version</th>
+						</tr>
+					</thead>
+					<tbody>
+						
+					</tbody>
+				</table>
+			</div>
+			
+			
+			<a name="component"></a>
+			<hr/>
+			
+			<div class="intro"><a name="changes"></a>
+				<h3>Changes Done for  8.8.1.06</h3>
+				<span style="color:gray; font-size:08pt;">Click the JIRA ID to view the problem statement and solution details. 
+				Click Milestone number to view the related migration scripts (applicable for Connections only).</span>
+				<table id="tblChangesMain" class="table table-condensed trable-bordered sstripe data_table" style="padding: 0px;">
+					<thead style="background-color: rgb(225, 225, 225); position: static; top: 0px; margin-top: 0px; left: 10px; z-index: 1; width: 1884px;" 
+					class="tableFloatingHeaderOriginal">
+					<tr>
+						<th style="min-width: 7%;">Milestone</th>
+						<th style="min-width: 7%;">JIRA</th>
+						<th style="min-width: 7%;">GT</th>
+						<th style="min-width: 7%;">FO</th>
+						<th style="min-width: 7%;">Sev</th>
+						<th style="min-width: 7%;">Version</th>
+						<th>Summary</th>
+						
+					</tr>
+					</thead>
+					<thead style="background-color: rgb(225, 225, 225); display: none;" class="tableFloatingHeader">
+					<tr><th>Milestone</th>
+						<th>JIRA</th>
+						<th>GT</th>
+						<th>FO</th>
+						<th>Sev</th>
+						<th>Version</th>
+						<th>Summary</th></tr>
+						
+					</tr>
+					</thead>
+					<tbody>
+						
+<tr class="upper_row_tracker" jira_id="132096">
+<td class="i ver " >8.8.1.06</td>
+<td>GC-42451</td>
+<td>None</td>
+<td>None</td>
+<td>P2</td>
+<td>8.8.1.05</td>
+<td>Mapping Designer debug does not launch</td></tr>
+
+<tr class="extra hidden jira_132096"><td colspan=5></td><td colspan=5>
+<table class="table table-bordered table-condensed tblProblemSolution"><thead><tr><th>Problem</th><th>Resolution</th></tr><thead><tbody>
+<tr>
+<td style="width:40%;" >While debugging , when splitter is used from database it throws error of class not found.</td>
+<td style="width:60%;" >Code changes done so that splitter can be used from database and to avoid class not found exception.</td>
+</tr></tbody></table>
+	</td></tr>
+
+<tr><td colspan="9">                                    <button class="btn btn-primary btn-xs" id="bc" onclick="show_hide_changes()">show older changes</button>                                </td></tr>
+<tr class="hidden old_changes row_tracker" jira_id="130199">
+<td class="i ver " >8.8.1.05</td>
+<td>GC-42298</td>
+<td>None</td>
+<td>None</td>
+<td>P2</td>
+<td>8.8.1.04</td>
+<td>Unable to load emap from Workbench for all the mappings together</td></tr>
+
+<tr class="oldversion extra hidden jira_130199"><td colspan=5></td><td colspan=5>
+<table class="table table-bordered table-condensed tblProblemSolution"><thead><tr><th>Problem</th><th>Resolution</th></tr><thead><tbody>
+<tr>
+<td style="width:40%;" >Following error raised while uploading metadata from mapping designer :<br/><br/>Caused by: org.hibernate.boot.registry.classloading.spi.ClassLoadingException: Unable to load class [org.postgresql.Driver]</td>
+<td style="width:60%;" >Code changes done to resolve the class loading of org.postgresql.Driver</td>
+</tr></tbody></table>
+	</td></tr>
+
+					</tbody>
+				</table>
+
+			</div>
+			<br/>
+			<div class="intro">
+				
+			</div>
+			<br/>
+			<div class="intro"><a name="Dependencies"></a>
+				
+			</div>
+		</div>
+	
+	<div style="clear:both"/>
+	
+	<hr size="1"/>
+	
+	<p align="right" class="tiny" style="margin-right:5%;font-size:12px;">source of information: support@thegoldensource.com</p>
+
+<div class="row-fluid footer ">
+	<div class="copyright offset1 span10">
+		<h5>Copyright Notice</h5>
+		<p>The information contained in this document is subject to change without notice. GoldenSource Corporation MAKES NO WARRANTY OF 
+			ANY KIND WITH REGARD TO THIS MATERIAL, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS 
+			FOR A PARTICULAR PURPOSE. Except to correct same after receipt of reasonable notice, GoldenSource Corporation shall not be 
+			liable for errors contained herein or for incidental and/or consequential damages in connection with the furnishing, performance, 
+			or use of this material.</p>
+		<p>This document contains proprietary and confidential information that is protected by copyright.<br/>Copyright 2001-2022 , 
+			GoldenSource Corporation. All rights reserved.<br/>The names of other organizations and products referenced herein are the 
+			trademarks or service marks (as applicable) of their respective owners. Unless otherwise stated herein, no association with 
+			any other organization or product referenced herein is intended or should be inferred.</p>
+		<p>	GoldenSource Corporation<br/>111 Broadway, 16th Floor<br/>New York, NY 10006<br/>United States<br/>+1 (212) 798-7100</p>
+	</div>
+	<div class="span1">
+		&nbsp;
+	</div>
+</div>
+
+<style>
+	.b{font-weight: bold;}
+	.i{font-style: italic;}
+	body{margin:10px;font-family:segoe ui, tahoma, verdana, arial;color:#333333;color:#000}
+	a{text-decoration:none !important; outline:none !important;}
+	table{margin-bottom:0px !important;}
+	div{margin-left:auto;margin-right:auto;}
+	table{border-collapse:collapse;}
+	div.header{margin:10px 0px 3px 0px;}
+	.footer{font-size:11px;}
+	a,a:visited,a:hover,a:focus{text-decoration:none;border-bottom:0px solid #eee;color:#224A68;}
+	a:hover,a:focus{border-bottom:1px solid #e1e1e1 !important;color:#000;}
+	ul.gs_toc li{line-height:26px; list-style-type:circle;}
+	.ttoc ul{list-style:none; margin-left:0px;}
+	.ttoc li{list-style:none; border-radius:10px; background-color:#eee; margin:10px 0px 0px 0px; padding:5px;}
+	.ttoc li:hover{background-color:#DCDCDC;}
+	hr{height:1px; border:0px; border-bottom:1px solid #eee;}
+	.copyright p{font-size:11px; }
+	.toc{float:left; width:30%;}
+	.copyright{width:96%;}
+	.toc a{font-size:14px;}
+	a{text-decoration:none !important; outline:0px !important;}
+	.stripe tbody tr:nth-child(2n) td { background: #fafafa !important; }
+	ttr.stripe td { background: #f5f5f5 !important; }
+	h1,h2,h3,h4,h5,h6{color:#D96221;}
+	.tblChanges
+	{	background-color:#FBF2DB !important;
+		margin-bottom:20px !important;
+	}
+	.tblProblemSolution
+	{	background-color:#FBF2DB !important;
+		margin-bottom:0px !important;
+	}
+	.tblChanges thead th
+	{	color:#007FFF !important;
+		color:#000 !important;
+	}
+	tr.row_tracker,tr.upper_row_tracker{cursor:pointer}
+	.tblChanges,
+	.tblChanges tr,
+	.tblChanges td,
+	.tblChanges th,
+	.tblChanges tbody,
+	.tblChanges thead,
+	.tblProblemSolution,
+	.tblProblemSolution tr,
+	.tblProblemSolution td,
+	.tblProblemSolution th,
+	.tblProblemSolution tbody,
+	.tblProblemSolution thead
+	{	border-radius:0px !important;
+		font-size:12px;
+	}
+	.no_top_border
+	{	border-top:0px !important;
+	}
+	pre	{
+		overflow: scroll; max-height:450px;
+	}
+	.page_title{
+		color:#224A68;
+		margin-top:18px;
+	}
+	.Release_Notes_Logo
+	{	float	: right	;
+		margin	: 0px	;
+		padding	: 0px	;
+		margin	: 4px 15px 0px 0px	;
+		width	: 192px	;
+		height	:  69px	;
+		background-repeat: no-repeat;
+		background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAABFCAMAAAArfxleAAAAkFBMVEUAAAAPTooPT4oQT4sPT4oPTokPT4oPTok\
+		PT4oqWoIPTokQT4r4wRkQT4sPT4oPTokPT4sPTokPTooPTooPTokPTon0vRkPTogPTon0vRj0vRn0vRj3wBn2vxnyvBkPToj1vhn2vxn3wBn4wBnxuxj0vRjyuxgPTYcQTY\
+		cQTYbuuRruuRkQT4ryvBn1vRkQT4od8JMfAAAAKHRSTlMAfCMx6ZkNqG0ER8wJPCrxGF5TjN21c9XCtYufSDvl9dldGyT0L834VEFTVwAABuFJREFUaN7UmMuuozAQRGs7k\
+		teWDASFBFh0qfz/nzeJYxzf3HmsrtScBQI3iy5wv4yfIVyGNNPI6xg3nI4tkWb2FECjNASciXvSy/vn5XWn8UQSBlXHTftqL0hGnINwlVWYkVRvzTTiDISybyoCZAfUDP8E\
+		0Rq8ArnJoWmHe0Tr2IDULZxAQZK9IQFs+qJggWum4m3LoCse1BW+rhmuOfwv7ta0MxcxNJ4gkC+0AhmfEvJRFSgOzXSDXzKPP7BjbNuFVETLrUxwS5AdKCCMqcoafuEiNpP\
+		fniLxnfJTp+sVHM10h1dWa1C3j+6or25OCe/vTyqhY9ZzrVpXOKUIII3K4xI+bHHPqhLoNQg2Gkldxwl/ZEmraPQr4EJyj//0LsSV9CxgXLb/vBN31wKMzMMFfyGOWXQcAz\
+		e+ujjlcbp///Qpq5j9/oHQEuW3CXjIXR4VnNJ1Evxo/K+nKGSY2VVifEFsNsenE1vzsTTNy4LCPgHDKZq59x7iiktWRkGaA8jD5DYEHgxtHpiSaMSTiaTGaFWB42YUCP1IS\
+		SqWALby0IZleOZom6u3Mx6oLhSoCa4R7Q0zgHvV5H+gPDZRJ4F3IHbPjqtwY5F10+PYjhadF+GOKLLfQ7krz/ScgX63Z207TsNA1EnqxHGUbC6NGgGiEi94hJf//zzmZm8a\
+		tYBQESBx1NXa7nh8jueSrHYfg4yv5p2q4Ze8vz5/BJ9eX3PPeffxjf/fXr+HbqqNVP9Vhtf/974C3QvCe4nCF+H/r9Fn4B8wXwSvr/hH2j+JTx8Y/0jp/sd//Mcfx+B78z3\
+		44rCwmJ/G6H1tfiv6NQYIMbqH8s6h2c/bJUbzY6hpAHS+lObJqJZl5EG9hQD4IQ3VXdM1wI2AEuc/KWAJCOCfzjwVzk6T9cQfkLoqALh7Tyf8ai9gCOEnBTRyMYL41CBsbt\
+		vmldgFFoAgEZ/vCgi/KGCMwMyjxLcwz0NZuJfLgKyKQLBDO1o+pXimAMu+W6qyQPyfG4HpalbTBrr5XmqZEtWrQNt13TIcBQy4vM3lm4B6IbtR7tshjNu6bp0NI6Lhi5Zcn\
+		IxibnCPa2W/Q/CwwgGZ8MJEFkKKiDRz7jd5r7P1uHnjqb5curBmzLkLQJ/iVoBjuXDKAorIC8ExBSC+UrXbTsABZ7aAwIJK2lOL7xBOsgfO7JRYpwZzZpu2C0AbuFS9tQMH\
+		GUJrDui4KhKRLMBRSmtZRtGZ5k4FQNATLQugr9be7BFyzygeCRCWccAJelDzkbsJ6Hm5H1xwdjEHLFrVwiwLqNMyaATmwONIJ7YsAGgo0jngcl5cpnpXT8kmlo8ESM1LsJQ\
+		HRAoHJAU5rjS3B/61VLOX+n4TMJNxU/WNRqCl32ttBjphTRFwVd+FVLKBD+cccFInPJl6S1ziQwFbsURrZgmud585oeqAQLeeXPqdgEJKqxAo0Z6WNNAq4JyUFyJgSBfd4i\
+		CqgElzHzr+BkeaWJF5rkJYs298IIBzYsD0YBvEJSJhC1gdfD56tEkALhba8hiRR3AyiciqAsS1zW1UhJ48AQcqQOppw8HZaJmnwgAiGgH4GxnND4q4MmqSG8xMKtBi8YiZM\
+		mqfQgcBL3mtICkqgO8Z3E7AKumh7FoWIH79vvsMxSVK8p6FnjTnK4l8EIEhpRuIcdajB6aDSBX5PQiIpNRkp1kA7Z93AuRuFeB3Avpj+6wsm7ZMok4C4IEA7TGlNJ+MGPbQ\
+		1mmzg8naFYQY5AjAbQQCFFmAiIeEUD0QoLBCPWZOL6ARAODzFzgKGMl/eRuBfGAS4GnCbPU5xakB4aK3BKFTAeKgyQLEvGsTzF0BjUkIiJp9rHle8C2LgO0oQG5sNhkvAWD\
+		anadGlJyTjqVmnRacqQJiUQFcG3DlhBABnuxMwl0Bp9jU+wgQCbGZaD5KW63YNMBBAD23QIuK+DTchY5Y5Mk/VZ4qlttnGYipb2fp1VnABIFDMGsR1YF4eiLj7gqoI11P4/\
+		p+anBEagfae6laBzI3UdLPUJEcBSy85luqIBil/68ldTaWrLgCncIAkKfyqskthLOAkUnEKG09ve3LQnNPgNMqZ3daQDRhP/qsOeNInR4FZGN2EIWH2k4mo1ZvbPW53S3pJ\
+		akATgO1S0zJTN3beynk1F7RcmWmTfEilbprxkcBpZLXflpCMobY7xR0QhU/XVqiVAWKXy0CtHq7oIcr0/YUye5BBBD+GiCR2AxjAKGU5oVEBz4fUkgcgfgHWaqYKE2due3S\
+		dMdnu8usqcNtmwbKNk1TyPIF4FqMOLfaxVZ6v1jYfZmXhzeDfuF348syGEVbnHGh6fPpKwB0s9c9DWI0GY5fN13a6zrK86I2im9wNLnfO7GFCwAAAABJRU5ErkJggg==');
+	}
+	pre{
+		white-space: pre-wrap;
+		word-break : normal;
+	}
+</style>
+<script>
+function show_hide_changes()
+{	
+	if ($('#bc').html()=='show older changes')
+	{	$('tr.old_changes').removeClass('hidden');
+		$('#tblChangesMain > tbody > tr.row_problem').addClass('hidden');
+		$('#tblChangesMain > tbody > tr.extra').addClass('hidden');
+		$('#bc').html('hide older changes');
+	}
+	else
+	{	$('tr.old_changes').addClass('hidden');
+		$('#tblChangesMain > tbody > tr.row_problem').addClass('hidden');
+		$('#tblChangesMain > tbody > tr.extra').addClass('hidden');
+		$('#bc').html('show older changes');
+	}
+}
+function show_hide_milestones()
+{	
+	if ($('#bm').html()=='show older milestones')
+	{	$('tr.oldmilestones').removeClass('hidden');
+		$('#tblMilestones > tbody > tr.row_problem').addClass('hidden');
+		$('#tblMilestones > tbody > tr.extra').addClass('hidden');
+		$('#bm').html('hide older milestones');
+	}
+	else
+	{	$('tr.oldmilestones').addClass('hidden');
+		$('#tblMilestones > tbody > tr.row_problem').addClass('hidden');
+		$('#tblMilestones > tbody > tr.extra').addClass('hidden');
+		$('#bm').html('show older milestones');
+	}
+}
+
+$(function(){
+
+	$('table').on( 'click' , 'tr.row_tracker,tr.upper_row_tracker' , function(){
+		$( 'tr.jira_' + $(this).attr('jira_id') ).toggleClass('hidden');
+	});
+
+    //$("#tblMilestones").stickyTableHeaders();
+});
+
+//////////////////////////////////////////////////////////////////////
+// make first milestone bold
+//////////////////////////////////////////////////////////////////////
+function Make_First_Milestone_Bold(For_Table_ID)
+{	function onlyUnique(value, index, self) {
+	  return self.indexOf(value) === index;
+	}
+	var All_Versions = []
+	$(`#${For_Table_ID} tbody tr`).each(function(){
+		All_Versions.push($('td:eq(0)',$(this)).text())
+	})
+	var Unique_Versions = All_Versions.filter(onlyUnique);
+	$.each( Unique_Versions, function( key, value ) {
+		$(`#${For_Table_ID} tbody tr`).each(function(){
+			if (value==$('td:eq(0)',$(this)).text())
+			{	$('td.ver:eq(0)',$(this)).css({'font-weight':'bold'}).removeClass('i')
+				return false;
+			}
+		})
+	});
+}
+Make_First_Milestone_Bold('tblMilestoneAll')
+Make_First_Milestone_Bold('tblChangesMain')
+//////////////////////////////////////////////////////////////////////
+</script>
