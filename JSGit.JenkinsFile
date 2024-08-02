@@ -10,11 +10,13 @@ pipeline{
 			script {
 			  // Checkout the repository and save the resulting metadata
 			  checkout([
-				$class: 'GitSCM',
-				branches: [[name: '2024.08.02']],
-				credentialsId: '423a63a0-04a3-4e1c-806f-e7f41f0a9847',
-				userRemoteConfigs: [[url: ‘https://github.com/goldenforce/mdms_repo.git’]]
-			  ])
+					$class: 'GitSCM', 
+					branches: [[name: '*/2024.08.02']], 
+					doGenerateSubmoduleConfigurations: false, 
+					extensions: [[$class: 'CleanCheckout']], 
+					submoduleCfg: [], 
+					userRemoteConfigs: [[credentialsId: '423a63a0-04a3-4e1c-806f-e7f41f0a9847', url: 'https://github.com/goldenforce/mdms_repo.git']]
+				])
 			}
 		  }
 		}		
