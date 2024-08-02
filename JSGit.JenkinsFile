@@ -25,7 +25,7 @@ pipeline{
              script {			    
         			  sh '''
         				cd /ext/app/Jenkins/workspace/GIT_MDMS/jobscheduler/PROD/2.5.1/Objects
-				        zip -r JS7Objects_${js_version}_${branch_name}.zip . -x '*.*'"
+				        zip -r JS7Objects_${js_version}_${branch_name}.zip . -x '*.*'
 						curl -sSf -X PUT -T JS7Objects_${js_version}_${branch_name}.zip "http://ingsrepo:8082/artifactory/Dev/cloud/test/JS7Objects_${js_version}_${branch_name}.zip" -u "admin:P@ssw0rd1" 
         			   '''
         	}
