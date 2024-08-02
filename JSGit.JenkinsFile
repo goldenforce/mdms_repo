@@ -11,7 +11,7 @@ pipeline{
 			  // Checkout the repository and save the resulting metadata
 			  checkout([
 					$class: 'GitSCM', 
-					branches: [[name: '*/2024.08.02']], 
+					branches: [[name: "*/${branch_name}"]], 
 					doGenerateSubmoduleConfigurations: false, 
 					extensions: [[$class: 'CleanCheckout']], 
 					submoduleCfg: [], 
