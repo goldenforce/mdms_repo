@@ -2,7 +2,7 @@
   "TYPE" : "Workflow",
   "version" : "1.1.0",
   "timeZone" : "Europe/Budapest",
-  "title" : "Workflow for Sending Murex FX Forward files to business",
+  "title" : "Test Comment",
   "orderPreparation" : {
     "parameters" : {
       "murex_offset" : {
