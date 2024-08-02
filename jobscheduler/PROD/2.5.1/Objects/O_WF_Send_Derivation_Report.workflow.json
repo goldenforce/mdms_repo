@@ -1,0 +1,227 @@
+{
+  "TYPE" : "Workflow",
+  "version" : "1.1.0",
+  "timeZone" : "Europe/Budapest",
+  "title" : "Workflow for Sending Derivation Report",
+  "orderPreparation" : {
+    "parameters" : {
+      "dr_folder" : {
+        "type" : "String",
+        "default" : "\"/edmfs/transfers/sftpuser/pub/interfaces/derivation_report\""
+      },
+      "dr_offset" : {
+        "type" : "Number",
+        "default" : "0"
+      }
+    },
+    "allowUndeclared" : false
+  },
+  "jobResourceNames" : [ "C_JR_Common" ],
+  "instructions" : [ {
+    "TYPE" : "Try",
+    "try" : {
+      "instructions" : [ {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Send_Derivation_Report_Send_Start_Email",
+        "label" : "O_A_SSEM"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Send_Derivation_Report_Generate_Report",
+        "label" : "R_JB_GDR"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Send_Derivation_Report_Prepare_Email",
+        "label" : "O_JB_Send_DEE"
+      }, {
+        "TYPE" : "If",
+        "predicate" : "$returnCode == 5",
+        "then" : {
+          "instructions" : [ {
+            "TYPE" : "Execute.Named",
+            "jobName" : "Operations_Send_Derivation_Report_Send_Email",
+            "label" : "O_JB_Send_Email"
+          } ]
+        }
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Send_Derivation_Report_Send_End_Email",
+        "label" : "Operations_Audit_Send_Email"
+      } ]
+    },
+    "catch" : {
+      "instructions" : [ {
+        "TYPE" : "Finish",
+        "unsuccessful" : true
+      } ]
+    }
+  } ],
+  "jobs" : {
+    "Operations_Send_Derivation_Report_Send_Start_Email" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.mail.MailJob",
+        "arguments" : {
+          "to" : "\"12f1ed54.Commerzbank.onmicrosoft.com@emea.teams.ms\"",
+          "mail.smtp.host" : "\"mrelay.zit.commerzbank.com\"",
+          "subject" : "\"Derivation Report Status: Started\"",
+          "body" : "\"Derivation Report Preparation Task has been started.\"",
+          "from" : "\"nikica.grgic@commerzbank.com\"",
+          "cc" : "\"afa55d54.Commerzbank.onmicrosoft.com@emea.teams.ms\"",
+          "mail.smtp.starttls.enable" : "true",
+          "mail.smtp.ssl.enable" : "false",
+          "mail.smtp.ssl.protocols" : "\"TLSv1.2\"",
+          "mail.smtp.port" : "25",
+          "mail.smtp.ssl.trust" : "\"*\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "jobResourceNames" : [ "C_JR_Common" ],
+      "title" : "Operations_Send_Derivation_Report_Send_Start_Email",
+      "documentationName" : "MailJob",
+      "notification" : {
+        "types" : [ "ERROR", "WARNING" ],
+        "mail" : {
+          "to" : "mdrplussupport@commerzbank.com",
+          "cc" : "afa55d54.Commerzbank.onmicrosoft.com@emea.teams.ms"
+        }
+      }
+    },
+    "Operations_Send_Derivation_Report_Generate_Report" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "ShellScriptExecutable",
+        "script" : "cd $scripts_home\nutils=./jobutilities\n\ngenerate_derivation_report() {\n    offset=$((-$1))\n    echo \" \"\n    echo \"=================================================================================================\"\n    echo \"Generate Derivation Report\"\n    echo \"=================================================================================================\"\n    echo \"Wrapper: CBK_Daily_DerivationReport\"\n    echo \"Offset: ${offset}\"\n\tparam_gdr=${input_param_gdr/offset/${offset}}\n   \techo \"Input param: ${param_gdr}\"\n    echo \"=================================================================================================\"\n\t$utils execWkf_inputParam \"$param_gdr\" CBK_Daily_DerivationReport fileloading\n}\n\ngenerate_derivation_report $gdr_offset",
+        "env" : {
+          "scripts_home" : "'/ext/app/jobscheduler/scripts/'",
+          "input_param_gdr" : "'{\\\"Spliter\\\":\\\",\\\",\\\"ReportName\\\":\\\"DerivationReport\\\",\\\"PublishToTemproryDirectory\\\":\\\"/edmfs/transfers/sftpuser/pub/interfaces/derivation_report\\\",\\\"FileName\\\": null,\\\"PublishToDirectory\\\":\\\"/edmfs/transfers/sftpuser/pub/interfaces/derivation_report\\\",\\\"TemproryFileType\\\": \\\"CSV\\\",\\\"DateOffset\\\":offset,\\\"PublishToTemproryFileNamePattern\\\":\\\"<ReportName>_<Sysdate[yyyyMMddHHmmss]>\\\",\\\"FileHeader\\\":\\\"Date,Instrument Name,Snap,Currency,Price,Formula,Derivation Details,Derivation Time Stamp\\\",\\\"JobConfig\\\":\\\"Reporting_Generate_Derivation_Report\\\"}'",
+          "gdr_offset" : "$dr_offset"
+        },
+        "v1Compatible" : false
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "jobResourceNames" : [ "C_JR_Common" ],
+      "title" : "Operations_Send_Derivation_Report_Generate_Report",
+      "notification" : {
+        "types" : [ "ERROR", "WARNING" ],
+        "mail" : {
+          "to" : "mdrplussupport@commerzbank.com",
+          "cc" : "afa55d54.Commerzbank.onmicrosoft.com@emea.teams.ms"
+        }
+      }
+    },
+    "Operations_Send_Derivation_Report_Prepare_Email" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "ShellScriptExecutable",
+        "script" : "prepare_derivation_report_email() {\n    offset=$(($1))\n    echo \" \"\n    echo \"=================================================================================================\"\n    echo \"Preparing Derivation Report Email for Sending\"\n    echo \"=================================================================================================\"\n    echo \"Offset: ${offset}\"\n    found=1\n    echo \"File found: ${found}\"\n    echo \"f_f=${found}\" >> $JS7_RETURN_VALUES\n    echo \"=================================================================================================\"\n\n    #offset=$razor_offset\n    # get current date\n    d=$(date --date \"-${offset} days\" +%Y%m%d)\n\n    # get year\n\n    yyyy=\"${d:0:4}\"\n\n    #get month\n\n    mm=\"${d:4:2}\"\n    \n    #get date\n    \n    dd=\"${d:6:2}\"\n    \n    # Create file name prefix\n    att_name_prefix=\"DerivationReport_${yyyy}${mm}${dd}*.csv\"\n    archive_name=\"DerivationReport_${yyyy}${mm}${dd}.zip\"\n    datum=\"${dd}.${mm}.${yyyy}\"\n    \n    echo ${att_name_prefix}\n    \n    # set source folder\n    source_folder=\"/edmfs/transfers/sftpuser/pub/interfaces/derivation_report\"\n    \n    echo \"Searching for a latest file with prefix \\\"${att_name_prefix}\\\" in the folder ${source_folder}\"\n    \n    if  test $(find \"${source_folder}\" -type f -name \"${att_name_prefix}\" | wc -c) -gt 0; then\n        found_file=1\n        cd ${source_folder}\n        echo \"found=1\" >> $JS7_RETURN_VALUES\n        files=$(find \"${source_folder}\" -type f -name \"${att_name_prefix}\" -printf \"%T@ %f\\n\" | sort -nr | sed 's/^.* //; q;')\n        zip -j ${archive_name} ${files}\n        file_path=\"${source_folder}/${archive_name}\"\n        echo \"Attachment: ${file_path}\"\n        echo \"Found: ${found_file}\"\n        echo \"File found: ${found}\"\n\t\techo \"f_f=${found}\" >> $JS7_RETURN_VALUES\n\t\techo \"Attachment file: ${source_folder}/${archive_name}\"\n        echo \"att=${source_folder}/${archive_name}\" >> $JS7_RETURN_VALUES\n        subject=\"Derivation Report for ${dd}.${mm}.${yyyy}\"\n        echo \"Subject: ${subject}\"\n        echo \"sub=${subject}\" >> $JS7_RETURN_VALUES\n\t\texit 5\n    else\n        echo \"File with the prefix: ${att_name_prefix} not found in the folder ${source_folder}\"\n    fi\n\t\n\techo \"=================================================================================================\"\n\techo \"End of preparation job\"\n\techo \"=================================================================================================\"\n}\n\nprepare_derivation_report_email  $dr_offset",
+        "env" : {
+          "dr_offset" : "$dr_offset"
+        },
+        "v1Compatible" : false,
+        "returnCodeMeaning" : {
+          "success" : [ 0, 5 ]
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "jobResourceNames" : [ "C_JR_Common" ],
+      "title" : "Operations_Send_Derivation_Report_Prepare_Email",
+      "notification" : {
+        "types" : [ "ERROR", "WARNING" ],
+        "mail" : {
+          "to" : "mdrplussupport@commerzbank.com",
+          "cc" : "afa55d54.Commerzbank.onmicrosoft.com@emea.teams.ms"
+        }
+      }
+    },
+    "Operations_Send_Derivation_Report_Send_Email" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.mail.MailJob",
+        "arguments" : {
+          "to" : "\"tomas.cigan@commerzbank.com;richa.kochhal@commerzbank.com;IPVIRMailbox@commerzbank.com\"",
+          "mail.smtp.host" : "\"mrelay.zit.commerzbank.com\"",
+          "from" : "\"mdrplussupport@commerzbank.com\"",
+          "attachment" : "$att",
+          "content_type" : "\"text/html\"",
+          "body" : "\"Dear colleagues,<br />Please find attached ${sub}.<br /><br />\\n<hr size=1 width=\\\"100%\\\" noshade style='color:#FFC000' align=left>\\nBest regards,<br />\\n<strong>MDR+ DevOps Team</strong><br /><br />\\n<i><small>This email is automatically generated and sent by MDR+ job scheduler.<br />\\nIf you do not want to receive it please request from <a href=\\\"mailto:mdrplussupport@commerzbank.com\\\"><span style='color:#0563C1'>MDR+ DevOps Team</span></a> to remove you from the list of receipients.<small></i>\\n\"",
+          "subject" : "$sub",
+          "cc" : "\"mdrplussupport@commerzbank.com\"",
+          "mail.smtp.starttls.enable" : "true",
+          "mail.smtp.ssl.enable" : "false",
+          "mail.smtp.ssl.protocols" : "\"TLSv1.2\"",
+          "mail.smtp.port" : "25",
+          "mail.smtp.ssl.trust" : "\"*\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "jobResourceNames" : [ "C_JR_Common" ],
+      "title" : "Operations_Send_Derivation_Report_Send_Email",
+      "documentationName" : "MailJob",
+      "notification" : {
+        "types" : [ "ERROR", "WARNING" ],
+        "mail" : {
+          "to" : "mdrplussupport@commerzbank.com",
+          "cc" : "afa55d54.Commerzbank.onmicrosoft.com@emea.teams.ms"
+        }
+      }
+    },
+    "Operations_Send_Derivation_Report_Send_End_Email" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.mail.MailJob",
+        "arguments" : {
+          "to" : "\"12f1ed54.Commerzbank.onmicrosoft.com@emea.teams.ms\"",
+          "mail.smtp.host" : "\"mrelay.zit.commerzbank.com\"",
+          "subject" : "\"Derivation Report Status: DONE\"",
+          "body" : "\"Derivation Report Preparation Task has been completed\"",
+          "from" : "\"nikica.grgic@commerzbank.com\"",
+          "cc" : "\"afa55d54.Commerzbank.onmicrosoft.com@emea.teams.ms\"",
+          "mail.smtp.starttls.enable" : "true",
+          "mail.smtp.ssl.enable" : "false",
+          "mail.smtp.ssl.protocols" : "\"TLSv1.2\"",
+          "mail.smtp.port" : "25",
+          "mail.smtp.ssl.trust" : "\"*\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "jobResourceNames" : [ "C_JR_Common" ],
+      "title" : "Operations_Send_Derivation_Report_Send_End_Email",
+      "documentationName" : "MailJob",
+      "notification" : {
+        "types" : [ "ERROR", "WARNING" ],
+        "mail" : {
+          "to" : "mdrplussupport@commerzbank.com",
+          "cc" : "afa55d54.Commerzbank.onmicrosoft.com@emea.teams.ms"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "version" : "1.4.0",
+  "workflowNames" : [ "O_WF_CleanUp_Workflows" ],
+  "title" : "Schedule for cleaning up workflow instances",
+  "submitOrderToControllerWhenPlanned" : true,
+  "planOrderAutomatically" : true,
+  "calendars" : [ {
+    "calendarName" : "O_CL_CleanUp_Workflows",
+    "timeZone" : "Europe/Belgrade",
+    "periods" : [ {
+      "singleStart" : "20:00:00",
+      "whenHoliday" : "SUPPRESS"
+    } ]
+  } ],
+  "orderParameterisations" : [ ]
+}

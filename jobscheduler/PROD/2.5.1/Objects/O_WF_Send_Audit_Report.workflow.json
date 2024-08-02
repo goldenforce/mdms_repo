@@ -1,0 +1,1011 @@
+{
+  "TYPE" : "Workflow",
+  "version" : "1.1.0",
+  "timeZone" : "Europe/Budapest",
+  "title" : "Workflow for Sending Audit Report",
+  "orderPreparation" : {
+    "parameters" : {
+      "search_condition" : {
+        "type" : "String",
+        "default" : "'%@%'"
+      },
+      "audit_folder" : {
+        "type" : "String",
+        "default" : "'/edmfs/transfers/audit'"
+      },
+      "hibernate_configuration_file" : {
+        "type" : "String",
+        "default" : "'/edmfs/transfers/audit/config/hibernate.cfg.xml'"
+      }
+    },
+    "allowUndeclared" : false
+  },
+  "jobResourceNames" : [ "C_JR_Common" ],
+  "instructions" : [ {
+    "TYPE" : "Try",
+    "try" : {
+      "instructions" : [ {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Send_Audit_Report_Send_Start_Email",
+        "label" : "O_A_SSEM"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Send_Audit_Report_Prepare_Configuration",
+        "label" : "O_SAR_PC"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Send_Audit_Report_Prepare_Audit_Report_Folder",
+        "label" : "O_A_CRF"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Audit_CADF_table",
+        "label" : "O_A_CADF"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Audit_CADP_table",
+        "label" : "O_A_CADP"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Audit_ISSU_table",
+        "label" : "O_A_ISSU"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Audit_ISID_table",
+        "label" : "O_A_ISID"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Audit_ISDE_table",
+        "label" : "O_A_ISDE"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Audit_MKIS_table",
+        "label" : "O_A_MKIS"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Audit_MKID_table",
+        "label" : "O_A_MKID"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Audit_RIDF_table",
+        "label" : "O_A_RIDF"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Audit_PRVI_table",
+        "label" : "O_A_PRVI"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Audit_RISS_table",
+        "label" : "O_A_RISS"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Audit_FXCH_table",
+        "label" : "O_A_FXCH"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Audit_SWCH_table",
+        "label" : "O_A_SWCH"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Audit_ICSC_table",
+        "label" : "O_A_ICSC"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Audit_ISGR_table",
+        "label" : "O_A_ISGR"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Audit_ISGP_table",
+        "label" : "O_A_ISGP"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Audit_VHDF_table",
+        "label" : "O_A_VHDF"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Audit_VHSR_table",
+        "label" : "O_A_VHSR"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Audit_PCRV_table",
+        "label" : "O_A_PCRV"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Audit_PDRV_table",
+        "label" : "O_A_PDRV"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Audit_PDRP_table",
+        "label" : "O_A_PDRP"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Audit_MDGR_table",
+        "label" : "O_A_MDGR"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Audit_MDGP_table",
+        "label" : "O_A_MDGP"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Audit_MTDI_table",
+        "label" : "O_A_MTDI"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Audit_MTGD_table",
+        "label" : "O_A_MTGD"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Audit_MTTY_table",
+        "label" : "O_A_MTTY"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Audit_MTRX_table",
+        "label" : "O_A_MTRX"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Audit_MTFD_table",
+        "label" : "O_A_MTFD"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Audit_MTFC_table",
+        "label" : "O_A_MTFC"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Send_Audit_Report_Revert_Configuration",
+        "label" : "O_SAR_RC"
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Send_Audit_Report_Prepare_Email",
+        "label" : "O_PreEmail"
+      }, {
+        "TYPE" : "If",
+        "predicate" : "$returnCode == 5",
+        "then" : {
+          "instructions" : [ {
+            "TYPE" : "Execute.Named",
+            "jobName" : "Operations_Send_Audit_Report_Send_Email",
+            "label" : "O_Audit_SE"
+          } ]
+        }
+      }, {
+        "TYPE" : "Execute.Named",
+        "jobName" : "Operations_Send_Audit_Report_Send_End_Email",
+        "label" : "Operations_Audit_Send_Email"
+      } ]
+    },
+    "catch" : {
+      "instructions" : [ {
+        "TYPE" : "Finish",
+        "unsuccessful" : true
+      } ]
+    }
+  } ],
+  "jobs" : {
+    "Operations_Send_Audit_Report_Send_Start_Email" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.mail.MailJob",
+        "arguments" : {
+          "to" : "\"12f1ed54.Commerzbank.onmicrosoft.com@emea.teams.ms\"",
+          "mail.smtp.host" : "\"mrelay.zit.commerzbank.com\"",
+          "subject" : "\"Audit Report Status: Started\"",
+          "body" : "\"Audit Report Tasks have been started.\"",
+          "from" : "\"nikica.grgic@commerzbank.com\"",
+          "cc" : "\"afa55d54.Commerzbank.onmicrosoft.com@emea.teams.ms\"",
+          "mail.smtp.starttls.enable" : "true",
+          "mail.smtp.ssl.enable" : "false",
+          "mail.smtp.ssl.protocols" : "\"TLSv1.2\"",
+          "mail.smtp.port" : "25",
+          "mail.smtp.ssl.trust" : "\"*\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "jobResourceNames" : [ "C_JR_Common" ],
+      "title" : "Operations_Send_Audit_Report_Send_Start_Email",
+      "documentationName" : "MailJob",
+      "notification" : {
+        "types" : [ "ERROR", "WARNING" ],
+        "mail" : {
+          "to" : "mdrplussupport@commerzbank.com",
+          "cc" : "afa55d54.Commerzbank.onmicrosoft.com@emea.teams.ms"
+        }
+      }
+    },
+    "Operations_Send_Audit_Report_Prepare_Configuration" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "ShellScriptExecutable",
+        "script" : "cd /edmfs/transfers/audit/config\nsed -i 's/dbpassword/'\"${DatabaseOwner_Password}\"'/g' hibernate.cfg.xml",
+        "v1Compatible" : false
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "jobResourceNames" : [ "C_JR_Common" ],
+      "title" : "Operations_Send_Audit_Report_Prepare_Configuration",
+      "notification" : {
+        "types" : [ "ERROR", "WARNING" ],
+        "mail" : {
+          "to" : "mdrplussupport@commerzbank.com",
+          "cc" : "afa55d54.Commerzbank.onmicrosoft.com@emea.teams.ms"
+        }
+      }
+    },
+    "Operations_Send_Audit_Report_Prepare_Audit_Report_Folder" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "ShellScriptExecutable",
+        "script" : "echo \" \"\necho \"=================================================================================================\"\necho \"Prepare Audit Reports Folder\"\necho \"=================================================================================================\"\n\nprepare_audit_folder()\n{\n\t# Get the folder path from argument\n    curr_date=\"$1\"\n    audit_path=\"$2\"\n    \n    curr_yr=${curr_date:0:4}\n    curr_mnt=${curr_date:4:2}\n   \n    echo \"Processing date: ${curr_date}\"\n    echo \"Done path: ${audit_path}\"\n\n    echo \"-------------------------------------------------------------------------------------------------\"\n    echo \" \"\n\n    echo \"CHECKS:\"\n\n    echo \" \"\n    echo \"-------------------------------------------------------------------------------------------------\"\n     \n    #ensure that done folder exists\n    echo \"-> Checking if audit folder [ ${audit_path} ] exists.\"\n    \n    if [ ! -d ${audit_path} ]; then\n        echo \"++ -> Folder [ ${audit_path} ] doesn't exist! Exiting...\"\n        exit 1\n    fi\n    \n    echo \"-> Checking audit folder [ ${audit_path}/${curr_yr}/${curr_mnt}/${curr_date} ] for the current date.\"\n        \n   #create backup subfolder for the current date\n   if [ ! -d \"${audit_path}/${curr_yr}/${curr_mnt}/${curr_date}\" ]; then\n        echo \"++ -> Folder [ ${audit_path}/${curr_yr}/${curr_mnt}/${curr_date} ] doesn't exist. Creating... it\"\n        mkdir -p \"${audit_path}/${curr_yr}/${curr_mnt}/${curr_date}\"\n        echo \"-> Checking again...\"\n        if [ ! -d \"${audit_path}/${curr_yr}/${curr_mnt}/${curr_date}\" ]; then\n            echo \"++ -> Folder not found: ${done_path}/${curr_yr}/${curr_mnt}/${curr_date}\"\n            exit 1\n        fi\n    else\n        echo \"++ -> Folder [ ${audit_path}/${curr_yr}/${curr_mnt}/${curr_date} ] exists.\"\n    fi\n    echo \"a_f=${audit_path}/${curr_yr}/${curr_mnt}/${curr_date}\" >> $JS7_RETURN_VALUES\n\n    echo \"a_ft_t_cadf=${audit_path}/${curr_yr}/${curr_mnt}/${curr_date}/audit_ft_t_cadf.json\" >> $JS7_RETURN_VALUES\n    echo \"a_ft_t_cadp=${audit_path}/${curr_yr}/${curr_mnt}/${curr_date}/audit_ft_t_cadp.json\" >> $JS7_RETURN_VALUES\n    echo \"a_ft_t_issu=${audit_path}/${curr_yr}/${curr_mnt}/${curr_date}/audit_ft_t_issu.json\" >> $JS7_RETURN_VALUES\n    echo \"a_ft_t_isid=${audit_path}/${curr_yr}/${curr_mnt}/${curr_date}/audit_ft_t_isid.json\" >> $JS7_RETURN_VALUES\n    echo \"a_ft_t_isde=${audit_path}/${curr_yr}/${curr_mnt}/${curr_date}/audit_ft_t_isde.json\" >> $JS7_RETURN_VALUES\n    echo \"a_ft_t_mkis=${audit_path}/${curr_yr}/${curr_mnt}/${curr_date}/audit_ft_t_mkis.json\" >> $JS7_RETURN_VALUES\n    echo \"a_ft_t_mkid=${audit_path}/${curr_yr}/${curr_mnt}/${curr_date}/audit_ft_t_mkid.json\" >> $JS7_RETURN_VALUES\n    echo \"a_ft_t_ridf=${audit_path}/${curr_yr}/${curr_mnt}/${curr_date}/audit_ft_t_ridf.json\" >> $JS7_RETURN_VALUES\n    echo \"a_ft_t_riss=${audit_path}/${curr_yr}/${curr_mnt}/${curr_date}/audit_ft_t_riss.json\" >> $JS7_RETURN_VALUES\n    echo \"a_ft_t_fxch=${audit_path}/${curr_yr}/${curr_mnt}/${curr_date}/audit_ft_t_fxch.json\" >> $JS7_RETURN_VALUES\n    echo \"a_ft_t_swch=${audit_path}/${curr_yr}/${curr_mnt}/${curr_date}/audit_ft_t_swch.json\" >> $JS7_RETURN_VALUES\n    echo \"a_ft_t_icsc=${audit_path}/${curr_yr}/${curr_mnt}/${curr_date}/audit_ft_t_icsc.json\" >> $JS7_RETURN_VALUES\n    echo \"a_ft_t_isgr=${audit_path}/${curr_yr}/${curr_mnt}/${curr_date}/audit_ft_t_isgr.json\" >> $JS7_RETURN_VALUES\n    echo \"a_ft_t_isgp=${audit_path}/${curr_yr}/${curr_mnt}/${curr_date}/audit_ft_t_isgp.json\" >> $JS7_RETURN_VALUES\n    echo \"a_ft_t_vhdf=${audit_path}/${curr_yr}/${curr_mnt}/${curr_date}/audit_ft_t_vhdf.json\" >> $JS7_RETURN_VALUES\n    echo \"a_ft_t_vhsr=${audit_path}/${curr_yr}/${curr_mnt}/${curr_date}/audit_ft_t_vhsr.json\" >> $JS7_RETURN_VALUES\n    echo \"a_ft_t_prvi=${audit_path}/${curr_yr}/${curr_mnt}/${curr_date}/audit_ft_t_prvi.json\" >> $JS7_RETURN_VALUES\n    echo \"a_ft_t_pcrv=${audit_path}/${curr_yr}/${curr_mnt}/${curr_date}/audit_ft_t_pcrv.json\" >> $JS7_RETURN_VALUES\n    echo \"a_ft_t_pdrv=${audit_path}/${curr_yr}/${curr_mnt}/${curr_date}/audit_ft_t_pdrv.json\" >> $JS7_RETURN_VALUES\n    echo \"a_ft_t_pdrp=${audit_path}/${curr_yr}/${curr_mnt}/${curr_date}/audit_ft_t_pdrp.json\" >> $JS7_RETURN_VALUES\n    echo \"a_ft_t_mdgr=${audit_path}/${curr_yr}/${curr_mnt}/${curr_date}/audit_ft_t_mdgr.json\" >> $JS7_RETURN_VALUES\n    echo \"a_ft_t_mdgp=${audit_path}/${curr_yr}/${curr_mnt}/${curr_date}/audit_ft_t_mdgp.json\" >> $JS7_RETURN_VALUES\n    echo \"a_ft_t_mtdi=${audit_path}/${curr_yr}/${curr_mnt}/${curr_date}/audit_ft_t_mtdi.json\" >> $JS7_RETURN_VALUES\n    echo \"a_ft_t_mtgd=${audit_path}/${curr_yr}/${curr_mnt}/${curr_date}/audit_ft_t_mtgd.json\" >> $JS7_RETURN_VALUES\n    echo \"a_ft_t_mtty=${audit_path}/${curr_yr}/${curr_mnt}/${curr_date}/audit_ft_t_mtty.json\" >> $JS7_RETURN_VALUES\n    echo \"a_ft_t_mtrx=${audit_path}/${curr_yr}/${curr_mnt}/${curr_date}/audit_ft_t_mtrx.json\" >> $JS7_RETURN_VALUES\n    echo \"a_ft_t_mtfd=${audit_path}/${curr_yr}/${curr_mnt}/${curr_date}/audit_ft_t_mtfd.json\" >> $JS7_RETURN_VALUES\n    echo \"a_ft_t_mtfc=${audit_path}/${curr_yr}/${curr_mnt}/${curr_date}/audit_ft_t_mtfc.json\" >> $JS7_RETURN_VALUES\n\n}\n\n\td=$(date --date=\"${offset_day}\" +%Y%m%d)\n\techo $offset_day\n    echo $d\n\nprepare_audit_folder  $d $audit_folder",
+        "env" : {
+          "audit_folder" : "$audit_folder"
+        },
+        "v1Compatible" : false
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "jobResourceNames" : [ "C_JR_Common" ],
+      "title" : "Operations_Send_Audit_Report_Prepare_Audit_Report_Folder",
+      "notification" : {
+        "types" : [ "ERROR", "WARNING" ],
+        "mail" : {
+          "to" : "mdrplussupport@commerzbank.com",
+          "cc" : "afa55d54.Commerzbank.onmicrosoft.com@emea.teams.ms"
+        }
+      }
+    },
+    "Operations_Audit_CADF_table" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.db.SQLExecutorJob",
+        "arguments" : {
+          "command" : "\"SELECT cal_id, last_chg_tms, last_chg_usr_id, cal_nme, cal_desc, data_stat_typ, data_src_id, cal_typ, weekend_start_num_typ, weekend_end_num_typ, cal_addl_desc, cal_curr_cde, cal_usage_typ\nFROM edm_881_gc.ft_t_cadf WHERE last_chg_usr_id LIKE '${search_condition}';\"",
+          "result_file" : "$a_ft_t_cadf",
+          "search_condition" : "$search_condition",
+          "hibernate_configuration_file" : "$hibernate_configuration_file",
+          "resultset_as_variables" : "\"json\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "title" : "Operations_Audit_CADF_table",
+      "documentationName" : "SQLExecutorJob"
+    },
+    "Operations_Audit_CADP_table" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.db.SQLExecutorJob",
+        "arguments" : {
+          "command" : "\"SELECT cal_id, greg_dte, bus_dte_ind, wk_end_ind, mth_end_ind, qrtr_end_ind, yr_end_ind, val_dte_ind, half_yr_end_ind, last_chg_tms, last_chg_usr_id, dte_desc, data_stat_typ, data_src_id, holiday_ind, dte_cde, start_tms, end_tms, last_upd_tms, half_day_ind, dte_nme, cross_ref_id, weekend_dte_ind, cadp_oid, dte_yr_num, processed_record_ind\nFROM edm_881_gc.ft_t_cadp WHERE last_chg_usr_id LIKE '${search_condition}';\"",
+          "result_file" : "$a_ft_t_cadp",
+          "search_condition" : "$search_condition",
+          "hibernate_configuration_file" : "$hibernate_configuration_file",
+          "resultset_as_variables" : "\"json\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "title" : "Operations_Audit_CADP_table",
+      "documentationName" : "SQLExecutorJob"
+    },
+    "Operations_Audit_ISSU_table" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.db.SQLExecutorJob",
+        "arguments" : {
+          "command" : "\"SELECT instr_id, access_auth_typ, iss_actvy_stat_typ, denom_curr_cde, end_tms, instr_issr_id, iss_tms, iss_obj_typ, iss_typ, iss_ut_meas_typ, mat_exp_tms, pref_id_ctxt_typ, start_tms, last_chg_tms, last_chg_usr_id, trdg_rst_typ, iss_rate_txt, iss_alph_srch_txt, when_issued_ind, sec_form_typ, indiv_certif_ind, dec_prec_num, prc_qt_meth_typ, prin_notl_ind, euro_cnvr_typ, dflt_stat_typ, dflt_tms, cl_typ, series_typ, part_full_pd_typ, pref_iss_id, pref_iss_nme, pref_iss_desc, data_stat_typ, data_src_id, par_value_typ, liquid_right_rank_typ, iss_actvy_stat_reas_typ, dlv_ind, dlv_reas_cde, monitor_restriction_cde, distribution_curr_cde, inc_bas_typ, prin_bas_typ, wthhld_tax_ind, wthhld_tax_levied_src_ind, typ_earn_for_life_cde, iss_ut_cqty, nom_val_unit_camt, prc_mltplr_crte, iscd_oid, eist_oid, illiquidity_ind, not_tradable_ind, bnch_oid, iss_tenor_typ, orig_mat_exp_tms, mat_exp_dte_extn_tms, govt_supp_ind, avr_exempt_ind, sec_lending_elig_ind, structured_sec_ind, mand_cnvr_ind, tsfr_rst_ind, substitution_clause_ind, repackaged_sec_ind, most_favored_lender_ind, rtng_maint_provs_ind, min_net_worth_bal_ind, cnvr_typ, tba_elig_typ, created_tms, orig_data_prov_id, data_redistributor_id, created_redistributor_id, created_data_prov_id, invs_close_dte, mat_typ, iss_actvy_stat_tms, mkt_list_typ, mat_val_lnk_typ, mat_dte_typ, dflt_trdng_stat_typ, reissue_tms, foreign_custody_ind, structured_sec_feat_txt, iss_yr_typ, main_risk_typ, guarantor_typ, alt_asset_class_txt, final_mat_tms, day_settle_qty, guaranteed_ind, guaranty_typ, guaranty_restrictions_txt, mat_dte_extn_dlne_dte, cr_mat_exp_dte_extn_tms, cr_mat_dte_extn_dlne_dte, prem_rsrv_fund_elig_ind, hybrid_ind, mrkt_trdng_elig_ind, book_entry_clcrp_typ, day_settle_std_qty, created_usr_id, exposure_curr_cde\nFROM edm_881_gc.ft_t_issu WHERE last_chg_usr_id LIKE '${search_condition}';\"",
+          "result_file" : "$a_ft_t_issu",
+          "search_condition" : "$search_condition",
+          "hibernate_configuration_file" : "$hibernate_configuration_file",
+          "resultset_as_variables" : "\"json\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "title" : "Operations_Audit_ISSU_table",
+      "documentationName" : "SQLExecutorJob"
+    },
+    "Operations_Audit_ISID_table" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.db.SQLExecutorJob",
+        "arguments" : {
+          "command" : "\"SELECT isid_oid, instr_id, id_ctxt_typ, iss_id, start_tms, end_tms, last_chg_tms, last_chg_usr_id, mkt_oid, trdng_curr_cde, iss_usage_typ, data_stat_typ, data_src_id, listing_symbol_ind, ergonomic_symbol_ind, trader_symbol_ind, multi_sedol_symbol_ind, instr_symbol_stat_typ, when_issued_ind, merge_uniq_oid, iss_tenor_typ, not_tradable_ind, srce_curr_cde, trgt_curr_cde, root_symbol_mnem, global_uniq_ind, orig_data_prov_id, when_distributed_ind, inst_mnem, prelim_term_prspctus_ind, prim_trd_mrkt_quote_ind, mkts_oid, srce_curr_non_std_cde, srce_curr_non_std_txt\nFROM edm_881_gc.ft_t_isid WHERE last_chg_usr_id LIKE '${search_condition}';\"",
+          "result_file" : "$a_ft_t_isid",
+          "search_condition" : "$search_condition",
+          "hibernate_configuration_file" : "$hibernate_configuration_file",
+          "resultset_as_variables" : "\"json\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "title" : "Operations_Audit_ISID_table",
+      "documentationName" : "SQLExecutorJob"
+    },
+    "Operations_Audit_ISDE_table" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.db.SQLExecutorJob",
+        "arguments" : {
+          "command" : "\"SELECT isde_oid, instr_id, nls_cde, desc_usage_typ, start_tms, end_tms, last_chg_tms, last_chg_usr_id, iss_desc, iss_nme, mkt_oid, iss_shrt_nme, iss_mnem, data_stat_typ, data_src_id, isid_oid, desc_srce_typ, orig_data_prov_id, mkt_iss_oid, desc_eff_tms, desc_exp_tms\nFROM edm_881_gc.ft_t_isde WHERE last_chg_usr_id LIKE '${search_condition}';\"",
+          "result_file" : "$a_ft_t_isde",
+          "search_condition" : "$search_condition",
+          "hibernate_configuration_file" : "$hibernate_configuration_file",
+          "resultset_as_variables" : "\"json\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "title" : "Operations_Audit_ISDE_table",
+      "documentationName" : "SQLExecutorJob"
+    },
+    "Operations_Audit_MKIS_table" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.db.SQLExecutorJob",
+        "arguments" : {
+          "command" : "\"SELECT mkt_iss_oid, mkt_oid, instr_id, iss_typ_grp_oid, last_chg_tms, last_chg_usr_id, trdng_stat_typ, trdng_curr_cde, first_trdng_tms, last_trdng_tms, trdng_floor_loc_id, specialist_id, prc_ut_meas_typ, trdng_ut_meas_typ, prc_curr_cde, acrd_in_flat_reas_typ, iss_prc_unit_typ, isid_oid, prim_trd_mkt_ind, settle_meth_typ, settle_curr_cde, daily_start_tme, daily_end_tme, nasdaq_portal_ind, seasoned_ind, mrgn_sec_ind, opt_elig_ind, opt_avail_ind, trdbot_dy_typ, trdbot_dy_num, trdbot_strt_num, gu_id, gu_typ, gu_cnt, qual_isid_oid, mkt_clsf_cde, trd_lot_size_cqty, start_tms, data_stat_typ, data_src_id, home_stock_exch_ind, fixed_exch_rate_ind, parity_price_ind, trd_suspend_prd_start_tms, trd_suspend_prd_end_tms, old_quote_calc_meth_typ, new_quote_calc_meth_typ, new_quote_meth_eff_tms, issu_quote_stat_cde, iss_trd_ut_cqty, prc_mltplr_crte, prc_partly_pd_camt, iss_prc_ut_camt, iss_prc_ut_vol_camt, rnd_lot_sz_cqty, norm_mkt_sz_cqty, low_lmt_cprc, up_lmt_cprc, space_low_cqty, space_med_cqty, opt_crs_strike_cprc, hdg_init_ml_camt, hdg_maint_ml_camt, spec_init_ml_camt, spec_maint_ml_camt, end_tms, mifid_avail_shr_cqty, mifid_liquid_shr_cqty, mifid_free_flt_shr_cqty, mifid_free_flt_to_cqty, day_settle_buy_qty, day_settle_sll_qty, pref_iss_id, mult_shr_ind, listing_tms, delisting_tms, pref_iss_ctxt_typ, stl_loc_typ, stl_loc_mnem, stl_cycle_typ, no_short_sell_ind, no_naked_short_sell_ind, sec_short_sale_ind, pref_prc_typ, listed_ind, opol_ind, actively_traded_ind, sse_sehk_elig_ind, sse_sehk_quote_stat_typ, days_to_settle_qty, days_to_settle_txt, short_sale_rst_typ, mifid_regulated_ind, euss_elig_ind, sec_tick_sz_grp_typ, fully_funded_ind, etf_prin_ric_txt, exch_stock_connect_typ, exch_sc_quote_stat_typ, tick_sz_camt, tick_sz_curr_cde, tick_val_curr_cde, issr_req_trdng_ind, issr_apprvl_trdng_tms, issr_rqst_trdng_tms, gunt_oid, mkt_iss_typ, addnl_listing_qual_typ, proc_when_issued_ind, proc_when_distributed_ind, non_tradable_listing_ind, init_margin_camt, maint_margin_camt, dirty_clean_ind, ofcl_place_listing_ind, mkt_segment_nme, cmis_oid, days_to_settle_conv_qty, non_process_listing_ind, orig_data_prov_id, rednm_meth_typ, rednm_rnd_meth_typ, rednm_tms, tick_val_camt\nFROM edm_881_gc.ft_t_mkis WHERE last_chg_usr_id LIKE '${search_condition}';\"",
+          "result_file" : "$a_ft_t_mkis",
+          "search_condition" : "$search_condition",
+          "hibernate_configuration_file" : "$hibernate_configuration_file",
+          "resultset_as_variables" : "\"json\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "title" : "Operations_Audit_MKIS_table",
+      "documentationName" : "SQLExecutorJob"
+    },
+    "Operations_Audit_MKID_table" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.db.SQLExecutorJob",
+        "arguments" : {
+          "command" : "\"SELECT mkt_oid, mkt_id_ctxt_typ, mkt_id, start_tms, end_tms, last_chg_tms, last_chg_usr_id, mkid_oid, data_stat_typ, data_src_id, created_tms\nFROM edm_881_gc.ft_t_mkid WHERE last_chg_usr_id LIKE '${search_condition}';\"",
+          "result_file" : "$a_ft_t_mkid",
+          "search_condition" : "$search_condition",
+          "hibernate_configuration_file" : "$hibernate_configuration_file",
+          "resultset_as_variables" : "\"json\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "title" : "Operations_Audit_MKID_table",
+      "documentationName" : "SQLExecutorJob"
+    },
+    "Operations_Audit_RIDF_table" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.db.SQLExecutorJob",
+        "arguments" : {
+          "command" : "\"SELECT rld_iss_feat_id, instr_id, start_tms, end_tms, advance_notice_qty, rel_typ, iss_rel_fq_qty, iss_rel_fq_dy_typ, iss_rel_fq_sp_typ, last_chg_tms, last_chg_usr_id, rel_desc, rld_rld_iss_feat_id, rld_ridf_sq_num, rld_ridf_purp_typ, xpd_fq_qty, xpd_fq_dy_typ, xpd_fq_sp_typ, xpd_start_tms, xpd_end_tms, xpd_end_dy_aj_qty, xpd_end_mth_aj_qty, xpd_end_aj_bas_typ, exer_pay_meth_typ, data_src_id, data_stat_typ, tick_sz_camt, tick_val_camt, mn_exer_cqty, mn_exer_camt, mn_exer_cprc, cnvr_exer_cprc, exer_fee_camt, tick_1pt_val_txt, mand_volun_ind, cnvr_curr_cde, underly_mgt_typ, interest_cmpnt_ind, free_of_charge_ind, prc_fix_meth_typ, buy_sell_typ, protct_buy_sell_typ, underly_swap_typ, underly_instr_typ, exer_typ, actl_cntrct_size_camt, toff_typ, underly_curr_cde, contingent_cnvr_typ, underly_cntrct_val_camt, csa_ind, csa_req_coll_typ, csa_rtng_trigger_ind, tick_base_crte, cnvr_cost_camt, underly_iss_id, cnvr_crit_typ, prc_unit_typ, prc_dec_prec_num, prc_ut_denom_camt, prc_model_typ, cnvr_exer_feat_typ, cnvr_exer_prc_unit_typ, cnvr_exer_typ, leg_num, cnvr_exer_prc_meth_txt, cntrct_adjst_ind, cnvr_exer_terms_typ, upside_prt_cpct, downside_prt_cpct, buffer_protect_cpct, barrier_protect_cpct, uit_typ, model_tier_typ, cap_ind, floor_ind, floor_typ, cap_typ, tick_1pt_val_camt, synthetic_ind, call_put_typ, sponsored_ind, ledf_oid, advance_notice_ut_typ, cmis_oid, cnvr_protect_ind, make_whole_cvt_ind, rate_fixing_index_iso_nme, rate_fixing_index_nme, rld_cardinality_typ, undly_curr_pair_txt\nFROM edm_881_gc.ft_t_ridf\nWHERE last_chg_usr_id LIKE '${search_condition}';\"",
+          "result_file" : "$a_ft_t_ridf",
+          "search_condition" : "$search_condition",
+          "hibernate_configuration_file" : "$hibernate_configuration_file",
+          "resultset_as_variables" : "\"json\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "title" : "Operations_Audit_RIDF_table",
+      "documentationName" : "SQLExecutorJob"
+    },
+    "Operations_Audit_PRVI_table" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.db.SQLExecutorJob",
+        "arguments" : {
+          "command" : "\"SELECT prvi_oid, prc_validation_typ, prc_typ, prc_validn_curr_cde, prcng_meth_typ, prc_srce_typ, instr_id, iss_typ, iss_typ_grp_oid, iss_grp_oid, mkt_oid, validation_override_ind, start_tms, end_tms, vhdf_oid, prc_qt_meth_typ, prcng_fq_sp_typ, prcng_fq_dy_typ, prcng_fq_qty, stale_prc_prd_qty, last_chg_tms, last_chg_usr_id, low_rng_cprc, up_rng_cprc, prc_tol_lower_cprc, prc_tol_upper_cprc, prc_tol_lower_cpct, prc_tol_upper_cpct, dwdf_oid, addnl_prc_qual_typ, data_src_id, tol_rte_adj_instr_id, prim_trd_mkt_ind, vendor_match_cnt, comp_max_prc_age_num, ovr_suspect_stat_ind, cmnt_txt, fx_typ, fx_rte_valid_typ, fx_prc_typ, fx_srce_typ, gprc_dflt_to_prior_ind, gprc_prc_deriv_ind, rel_typ, prc_valid_typ, gu_grp_oid, gu_id, gu_typ, gu_cnt, gu_purp_typ, highest_vol_ind, multi_vendor_cmprsn_txt, no_predecessor_stat_typ, gprc_gt_1_candidate_ind, prc_validation_nme, prc_validation_desc, addnl_prc_validation_typ, vnd_hier_con_cmprsn_ind, fx_cross_rte_curr_cde, derived_prc_gprc_ind, tol_cond_ind, high_vol_first_ind, gc_obs_prd_dy_cnt, pped_oid, mult_prc_txt, ispt_oid, ipgr_oid, prnt_prvi_oid, prc_validation_sq_num, on_valid_prvi_oid, on_suspect_prvi_oid, on_missing_prvi_oid, prc_mkt_cmp_ind, match_key_valid_txt, prc_tol_upper_formula_txt, prc_tol_lower_formula_txt, prc_tol_class_nme, prc_tol_formula_gprc_ind, gunt_oid, operator_cde, bus_dy_cnt, mkis_ind, mkt_grp_oid, stale_opt_ind, vendor_chk_ind, base_curr_cde, zero_prc_validation_typ, mtrx_oid, mtdi_oid, vrdf_oid, mdgr_oid, matrix_typ, rule_nme, formula_txt, formula_tol_rng_ind, dcng_oid, gprc_dflt_prior_proc_typ, on_suspect_continue_ind, next_prvi_oid, cvdf_oid, ref_pped_oid\nFROM edm_881_gc.ft_t_prvi WHERE last_chg_usr_id LIKE '${search_condition}';\"",
+          "result_file" : "$a_ft_t_prvi",
+          "search_condition" : "$search_condition",
+          "hibernate_configuration_file" : "$hibernate_configuration_file",
+          "resultset_as_variables" : "\"json\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "title" : "Operations_Audit_PRVI_table",
+      "documentationName" : "SQLExecutorJob"
+    },
+    "Operations_Audit_RISS_table" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.db.SQLExecutorJob",
+        "arguments" : {
+          "command" : "\"SELECT riss_oid, rld_iss_feat_id, instr_id, part_units_typ, iss_part_rl_typ, prin_inc_ind, last_chg_tms, last_chg_usr_id, exer_rte_typ, component_separation_ind, separation_start_tms, compulsory_separation_tms, assimilation_tms, assimilation_assumed_ind, ev_amt_bas_typ, ev_amt_typ, start_tms, data_stat_typ, data_src_id, ev_part_camt, exer_crte, component_instr_cqty, ev_bas_prt_camt, end_tms, iss_part_sub_rl_typ, part_ratio_crte, part_num, udrly_asset_sub_typ, udrly_asset_typ, isid_oid, cnvr_factor_crte, basket_wgt_typ, basket_wgt_camt, udrly_curr_cde, udrly_asset_id_ctxt_typ, udrly_asset_iss_id, udrly_asset_nme, mkt_oid, separation_strt_dte_ind, rld_msg_typ, underly_settle_stat_typ, udrly_mkt_nme, issuance_delta_crte, issuance_delta_eff_tms, init_hedge_camt, init_hedge_eff_tms, udrly_tenor_typ, frac_settle_typ, udrly_asset_tenor_desc, underly_settle_stat_desc, udrly_tick_sz_camt, udrly_tick_1pt_val_txt, bond_snrty_typ, mkt_iss_oid, udrly_asset_2_nme, udrly_asset_iso_nme, udrly_asset_mat_exp_tms, udrly_dur_cnt, udrly_dur_fq_sp_typ, udrly_index_version_id, udrly_issr_id, udrly_issr_id_ctxt_typ, udrly_series_typ, udrly_term_cqty, udrly_term_unit_typ, underly_issr_typ, undl_snrty_typ\nFROM edm_881_gc.ft_t_riss\nWHERE last_chg_usr_id LIKE '${search_condition}';\"",
+          "result_file" : "$a_ft_t_riss",
+          "search_condition" : "$search_condition",
+          "hibernate_configuration_file" : "$hibernate_configuration_file",
+          "resultset_as_variables" : "\"json\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "title" : "Operations_Audit_RISS_table",
+      "documentationName" : "SQLExecutorJob"
+    },
+    "Operations_Audit_FXCH_table" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.db.SQLExecutorJob",
+        "arguments" : {
+          "command" : "\"SELECT fxch_oid, instr_id, data_stat_typ, data_src_id, last_chg_tms, last_chg_usr_id, nom_tenor_mnem, fx_deal_typ, srce_curr_cde, trgt_curr_cde, init_fx_rte_tms, init_fx_inst_mnem, init_fx_finsrl_typ, fnl_fx_rte_tms, fnl_fx_inst_mnem, fnl_fx_finsrl_typ, init_fx_crte, fnl_fx_crte, crsrte_scl_camt, fx_party_typ, fx_dlne_tms, start_tms, end_tms, init_fx_finr_oid, fnl_fx_finr_oid, fx_underly_typ, fx_opt_cntrct_curr_cde\nFROM edm_881_gc.ft_t_fxch\nWHERE last_chg_usr_id LIKE '${search_condition}';\"",
+          "result_file" : "$a_ft_t_fxch",
+          "search_condition" : "$search_condition",
+          "hibernate_configuration_file" : "$hibernate_configuration_file",
+          "resultset_as_variables" : "\"json\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "title" : "Operations_Audit_FXCH_table",
+      "documentationName" : "SQLExecutorJob"
+    },
+    "Operations_Audit_SWCH_table" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.db.SQLExecutorJob",
+        "arguments" : {
+          "command" : "\"SELECT swch_oid, instr_id, start_tms, end_tms, data_stat_typ, data_src_id, last_chg_tms, last_chg_usr_id, rptg_inst_mnem, rptg_prty_is_dlr_ind, rptg_prty_is_prt_ind, rptg_prty_is_fins_ind, rptg_prty_is_us_ind, swap_will_be_alloc_ind, agent_inst_mnem, post_alloc_swap_ind, orig_swap_id, non_rptg_inst_mnem, non_rptg_prty_is_dlr_ind, non_rptg_prty_is_prt_ind, non_rptg_prty_is_fins_ind, non_rptg_prty_is_us_ind, upi_id, cftc_swap_desc, repository_swap_desc, multi_asset_swap_ind, prim_asset_class_typ, scnd_asset_class_typ, mixed_swap_ind, other_data_repository_id, prty_buy_protect_id, prty_sell_protect_id, ref_entity_id, swap_contract_typ, block_trd_ind, swap_exec_tms, swap_exec_venue_txt, swap_start_dte, swap_end_dte, swap_cprc, swap_prc_curr_cde, swap_prc_unit_typ, swap_notl_camt, swap_notl_curr_cde, swap_upfront_pay_camt, swap_upfront_pay_curr_cde, rptg_prty_pay_fq_desc, non_rptg_prty_pay_fq_desc, swap_repository_sub_tms, swap_clrng_ind, swap_clrng_venue_txt, swap_clrng_excp_ind, swap_clrng_excp_prty_id, swap_coll_typ, swap_notl_2_camt, swap_notl_2_curr_cde, swap_fx_crte, swap_dy_bas_typ, fixed_rte_payer_ind, float_leg_1_payer_id, float_leg_2_payer_id, swap_direct_typ, swap_opt_typ, swap_fixed_crte, swap_fixed_dy_bas_typ, py_dte_fq_dy_typ, py_dte_fq_qty, py_dte_fq_sp_typ, rate_fixing_idx_instr_id, rate_fixing_index_nme, rtfx_fq_qty, rtfx_fq_dy_typ, rtfx_fq_sp_typ, swap_buyer_id, swap_seller_id, swap_cqty, swap_qty_fq_typ, swap_tot_cqty, swap_settle_meth_typ, buyer_pay_index_cprc, buyer_pay_avg_meth_typ, seller_pay_index_cprc, seller_pay_avg_meth_typ, commodity_grade_typ, exer_typ, swap_opt_prem_camt, elec_power_hour_txt, elec_power_hour_tmz, elec_power_week_txt, elec_power_load_typ, notl_exch_typ, swap_tenor_typ, swap_leg_2_term_typ, multi_curr_ind, putable_ind, swap_upfront_pay_crte, swap_trdng_strategy_typ, pay_upon_dflt_qty, pay_upon_dflt_max_qty, cntrct_val_meth_typ, notl_adjst_typ, rte_lag_period_txt, rtfx_idx_iss_id, rtfx_idx_tenor_typ, swap_leg_ind\nFROM edm_881_gc.ft_t_swch\nWHERE last_chg_usr_id LIKE '${search_condition}';\"",
+          "result_file" : "$a_ft_t_swch",
+          "search_condition" : "$search_condition",
+          "hibernate_configuration_file" : "$hibernate_configuration_file",
+          "resultset_as_variables" : "\"json\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "title" : "Operations_Audit_SWCH_table",
+      "documentationName" : "SQLExecutorJob"
+    },
+    "Operations_Audit_ICSC_table" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.db.SQLExecutorJob",
+        "arguments" : {
+          "command" : "\"SELECT icsc_oid, instr_id, cal_id, second_cal_id, start_tms, end_tms, spot_lag_days_cnt, bus_dy_conv_typ, tenor_prd_end_conv_typ, days_mth_bas_typ, cmpnd_fq_sp_typ, maturity_dte, mat_prd_start_dte, mat_prd_end_dte, last_chg_tms, last_chg_usr_id, data_stat_typ, data_src_id, tenor_bus_dy_conv_typ, ev_typ, mtdi_oid, days_yr_bas_typ, conventions_nme, payment_lag_day_cnt, rolling_prd_typ, roll_pay_bus_dy_conv_typ, rtfx_typ, long_stub_period_ind, conventions_mnem, py_dte_fq_qty, py_dte_fq_dy_typ, py_dte_fq_desc, py_dte_fq_sp_typ, cal_purp_3_typ, cal_purp_4_typ, clsf_oid, curv_surf_iss_sub_typ, curv_surf_leg_curr_cde, curv_surf_restruct_typ, curv_surf_rtng_val_typ, curv_surf_sector_typ, curv_surf_snrty_typ, curv_surf_underly_cat_typ, dlv_ind, end_tenor_typ, fins_id, fins_id_ctxt_typ, fixed_cpn_crte, flt_reset_tenor_typ, forward_tenor_typ, fourth_cal_id, fx_atm_volat_calc_typ, fx_volat_delta_frgn_ind, fx_volat_dlta_style_typ, fx_volat_option_typ, fx_volat_sprd_modl_typ, gunt_oid, instr_issr_id, issr_nme, iss_typ, m2m_notl_allowed_ind, par_rate_iss_id, prc_fixing_dte_offset_qty, prc_fixing_dte_offset_typ, prc_fixing_srce_txt, prc_fixing_tme, prc_fixing_tmz_txt, ref_entity_nme, ref_entity_short_nme, rtng_value_oid, secnd_curr_cde, start_tenor_typ, third_cal_id\nFROM edm_881_gc.ft_t_icsc\nWHERE last_chg_usr_id LIKE '${search_condition}';\"",
+          "result_file" : "$a_ft_t_icsc",
+          "search_condition" : "$search_condition",
+          "hibernate_configuration_file" : "$hibernate_configuration_file",
+          "resultset_as_variables" : "\"json\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "title" : "Operations_Audit_ICSC_table",
+      "documentationName" : "SQLExecutorJob"
+    },
+    "Operations_Audit_ISGR_table" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.db.SQLExecutorJob",
+        "arguments" : {
+          "command" : "\"SELECT iss_grp_oid, org_id, subdiv_id, iss_grp_id, last_chg_tms, last_chg_usr_id, grp_purp_typ, start_tms, end_tms, cross_ref_id, grp_nme, grp_desc, instr_id, data_stat_typ, data_src_id, subd_org_id, dwdf_oid, dim_set_txt, dim_header_txt, subd_oid, pped_oid, pcfd_oid\nFROM edm_881_gc.ft_t_isgr\nWHERE last_chg_usr_id LIKE '${search_condition}';\"",
+          "result_file" : "$a_ft_t_isgr",
+          "search_condition" : "$search_condition",
+          "hibernate_configuration_file" : "$hibernate_configuration_file",
+          "resultset_as_variables" : "\"json\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "title" : "Operations_Audit_ISGR_table",
+      "documentationName" : "SQLExecutorJob"
+    },
+    "Operations_Audit_ISGP_table" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.db.SQLExecutorJob",
+        "arguments" : {
+          "command" : "\"SELECT prnt_iss_grp_oid, start_tms, iss_grp_oid, instr_id, last_chg_tms, last_chg_usr_id, prt_purp_typ, end_tms, part_typ, prt_desc, part_curr_cde, data_stat_typ, data_src_id, part_camt, part_cpct, isid_oid, mkt_iss_oid, isgp_oid, ref_iss_grp_oid, pped_oid\nFROM edm_881_gc.ft_t_isgp\nWHERE last_chg_usr_id LIKE '${search_condition}';\"",
+          "result_file" : "$a_ft_t_isgp",
+          "search_condition" : "$search_condition",
+          "hibernate_configuration_file" : "$hibernate_configuration_file",
+          "resultset_as_variables" : "\"json\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "title" : "Operations_Audit_ISGP_table",
+      "documentationName" : "SQLExecutorJob"
+    },
+    "Operations_Audit_VHDF_table" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.db.SQLExecutorJob",
+        "arguments" : {
+          "command" : "\"SELECT vhdf_oid, vendor_hier_nme, vendor_hier_desc, start_tms, end_tms, last_chg_tms, last_chg_usr_id, publishing_thshld_num, prc_weight_corr_fact_num, dwdf_oid, pcfd_oid\nFROM edm_881_gc.ft_t_vhdf\nWHERE last_chg_usr_id LIKE '${search_condition}';\"",
+          "result_file" : "$a_ft_t_vhdf",
+          "search_condition" : "$search_condition",
+          "hibernate_configuration_file" : "$hibernate_configuration_file",
+          "resultset_as_variables" : "\"json\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "title" : "Operations_Audit_VHDF_table",
+      "documentationName" : "SQLExecutorJob"
+    },
+    "Operations_Audit_VHSR_table" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.db.SQLExecutorJob",
+        "arguments" : {
+          "command" : "\"SELECT vhsr_oid, vhdf_oid, data_src_rank_num, data_src_id, start_tms, end_tms, last_chg_tms, last_chg_usr_id, vendor_srce_typ, prc_typ, vsh_fld_weight_num, addnl_prc_qual_typ, prc_cmp_ind, ispt_oid, mult_prc_txt, addnl_hier_qual_txt, dcng_oid, formula_min_data_pnt_num, price_pref_tme_txt, prc_formula_typ, prc_pref_lower_tme_txt, prc_pref_upper_tme_txt, prc_derived_ind\nFROM edm_881_gc.ft_t_vhsr\nWHERE last_chg_usr_id LIKE '${search_condition}';\"",
+          "result_file" : "$a_ft_t_vhsr",
+          "search_condition" : "$search_condition",
+          "hibernate_configuration_file" : "$hibernate_configuration_file",
+          "resultset_as_variables" : "\"json\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "title" : "Operations_Audit_VHSR_table",
+      "documentationName" : "SQLExecutorJob"
+    },
+    "Operations_Audit_PCRV_table" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.db.SQLExecutorJob",
+        "arguments" : {
+          "command" : "\"SELECT pcrv_oid, pcrp_oid, prvi_oid, parm_val_tms, parm_val_dte, parm_int_val_num, parm_char_val_txt, parm_val_camt, start_tms, end_tms, last_chg_tms, last_chg_usr_id\nFROM edm_881_gc.ft_t_pcrv\nWHERE last_chg_usr_id LIKE '${search_condition}';\"",
+          "result_file" : "$a_ft_t_pcrv",
+          "search_condition" : "$search_condition",
+          "hibernate_configuration_file" : "$hibernate_configuration_file",
+          "resultset_as_variables" : "\"json\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "title" : "Operations_Audit_PCRV_table",
+      "documentationName" : "SQLExecutorJob"
+    },
+    "Operations_Audit_PDRV_table" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.db.SQLExecutorJob",
+        "arguments" : {
+          "command" : "\"SELECT pdrv_oid, mtdi_oid, last_chg_usr_id, last_chg_tms, start_tms, end_tms, instr_id, pdrv_typ, rel_desc, pped_oid, prc_typ, data_stat_typ, data_src_id, mkt_oid, prc_curr_cde, prc_qt_meth_typ, prcng_meth_typ, prc_srce_typ, rule_nme, addnl_prc_qual_typ, operator_cde, formula_txt, dwdf_oid, pdrv_applicability_typ, pdrv_usage_typ, pdrv_lang_typ, cvdf_oid, deriv_fq_sp_typ, golden_value_ind, iss_grp_oid, prc_validation_typ\nFROM edm_881_gc.ft_t_pdrv\nWHERE last_chg_usr_id LIKE '${search_condition}';\"",
+          "result_file" : "$a_ft_t_pdrv",
+          "search_condition" : "$search_condition",
+          "hibernate_configuration_file" : "$hibernate_configuration_file",
+          "resultset_as_variables" : "\"json\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "title" : "Operations_Audit_PDRV_table",
+      "documentationName" : "SQLExecutorJob"
+    },
+    "Operations_Audit_PDRP_table" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.db.SQLExecutorJob",
+        "arguments" : {
+          "command" : "\"SELECT pdrp_oid, pdrv_oid, last_chg_usr_id, last_chg_tms, start_tms, end_tms, rld_mtdi_oid, rld_instr_id, parm_val_num, pped_oid, prc_typ, data_stat_typ, data_src_id, mkt_oid, prc_curr_cde, prc_qt_meth_typ, prcng_meth_typ, prc_srce_typ, addnl_prc_qual_typ, parm_nme, prc_deriv_parm_nme, rld_pdrv_oid, dwdf_oid, val_extr_expr_txt, val_extr_expr_filter_txt, bus_entity_typ_nme, snap_extr_expr_filter_txt, cvdf_oid, day_actual_latest_typ, day_typ, deriv_prt_age_num, deriv_prt_prc_stat_typ, iss_grp_oid, match_key_valid_txt, ppeg_oid, prc_qt_prt_typ, prt_tbl_typ\nFROM edm_881_gc.ft_t_pdrp\nWHERE last_chg_usr_id LIKE '${search_condition}';\"",
+          "result_file" : "$a_ft_t_pdrp",
+          "search_condition" : "$search_condition",
+          "hibernate_configuration_file" : "$hibernate_configuration_file",
+          "resultset_as_variables" : "\"json\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "title" : "Operations_Audit_PDRP_table",
+      "documentationName" : "SQLExecutorJob"
+    },
+    "Operations_Audit_MDGR_table" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.db.SQLExecutorJob",
+        "arguments" : {
+          "command" : "\"SELECT mdgr_oid, mtdi_oid, mdgr_purp_typ, grp_nme, grp_desc, start_tms, end_tms, last_chg_tms, last_chg_usr_id, data_stat_typ, data_src_id, matrix_grp_typ, curv_surf_process_typ\nFROM edm_881_gc.ft_t_mdgr\nWHERE last_chg_usr_id LIKE '${search_condition}';\"",
+          "result_file" : "$a_ft_t_mdgr",
+          "search_condition" : "$search_condition",
+          "hibernate_configuration_file" : "$hibernate_configuration_file",
+          "resultset_as_variables" : "\"json\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "title" : "Operations_Audit_MDGR_table",
+      "documentationName" : "SQLExecutorJob"
+    },
+    "Operations_Audit_MDGP_table" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.db.SQLExecutorJob",
+        "arguments" : {
+          "command" : "\"SELECT mdgp_oid, mdgr_oid, prnt_mdgr_oid, mtdi_oid, mdgp_purp_typ, mdgp_prt_typ, prt_desc, start_tms, end_tms, last_chg_tms, last_chg_usr_id, data_stat_typ, data_src_id, prt_prrity_num\nFROM edm_881_gc.ft_t_mdgp\nWHERE last_chg_usr_id LIKE '${search_condition}';\"",
+          "result_file" : "$a_ft_t_mdgp",
+          "search_condition" : "$search_condition",
+          "hibernate_configuration_file" : "$hibernate_configuration_file",
+          "resultset_as_variables" : "\"json\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "title" : "Operations_Audit_MDGP_table",
+      "documentationName" : "SQLExecutorJob"
+    },
+    "Operations_Audit_MTDI_table" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.db.SQLExecutorJob",
+        "arguments" : {
+          "command" : "\"SELECT mtdi_oid, mtrx_oid, mtdi_nme, curr_cde, fx_curr_cde, curv_rolling_ind, start_tms, end_tms, last_chg_usr_id, last_chg_tms, composite_curv_ind, day_cnt_desc, spot_lag_days_cnt, cal_id, tenor_bus_dy_conv_typ, tenor_prd_end_conv_typ, meth_nme, second_cal_id, interp_meth_typ, bus_dy_conv_typ, iss_grp_oid, use_curve_conv_ind, long_extrap_meth_typ, short_extrap_meth_typ, cmpnd_fq_sp_typ, mtdi_desc, created_tms, created_usr_id, mtdi_typ, forward_tenor_typ, tenor_typ, infl_interval_typ, bnch_oid, secnd_bnch_oid, gunt_oid, clsf_oid, instr_issr_id, rtng_value_oid, instr_id, secnd_instr_id, bond_snrty_typ, recovery_crte, restruct_cr_event_typ, days_mth_bas_typ, days_yr_bas_typ, pcfd_oid, surface_interp_axis_id, curve_conv_leg_typ, mtdi_mnem, max_pt_to_dspy_num, prc_typ, pped_oid, dwdf_oid, constituent_curve_ind, curve_proc_dspy_seq\nFROM edm_881_gc.ft_t_mtdi\nWHERE last_chg_usr_id LIKE '${search_condition}';\"",
+          "result_file" : "$a_ft_t_mtdi",
+          "search_condition" : "$search_condition",
+          "hibernate_configuration_file" : "$hibernate_configuration_file",
+          "resultset_as_variables" : "\"json\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "title" : "Operations_Audit_MTDI_table",
+      "documentationName" : "SQLExecutorJob"
+    },
+    "Operations_Audit_MTGD_table" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.db.SQLExecutorJob",
+        "arguments" : {
+          "command" : "\"SELECT mtgd_oid, mtrx_oid, x_mtfc_oid, y_mtfc_oid, z_mtfc_oid, instr_id, start_tms, end_tms, mtgd_desc, last_chg_tms, last_chg_usr_id, data_stat_typ, data_src_id, mtdi_oid, modellability_req_ind, matrix_segment_typ, meth_nme, linear_interp_ind, mtfd_oid\nFROM edm_881_gc.ft_t_mtgd\nWHERE last_chg_usr_id LIKE '${search_condition}';\n\"",
+          "result_file" : "$a_ft_t_mtgd",
+          "search_condition" : "$search_condition",
+          "hibernate_configuration_file" : "$hibernate_configuration_file",
+          "resultset_as_variables" : "\"json\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "title" : "Operations_Audit_MTGD_table",
+      "documentationName" : "SQLExecutorJob"
+    },
+    "Operations_Audit_MTTY_table" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.db.SQLExecutorJob",
+        "arguments" : {
+          "command" : "\"SELECT org_id, matrix_typ, start_tms, matrix_typ_nme, matrix_typ_desc, end_tms, last_chg_usr_id, last_chg_tms, data_stat_typ, data_src_id, prnt_matrix_typ\nFROM edm_881_gc.ft_t_mtty\nWHERE last_chg_usr_id LIKE '${search_condition}';\"",
+          "result_file" : "$a_ft_t_mtty",
+          "search_condition" : "$search_condition",
+          "hibernate_configuration_file" : "$hibernate_configuration_file",
+          "resultset_as_variables" : "\"json\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "title" : "Operations_Audit_MTTY_table",
+      "documentationName" : "SQLExecutorJob"
+    },
+    "Operations_Audit_MTRX_table" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.db.SQLExecutorJob",
+        "arguments" : {
+          "command" : "\"SELECT mtrx_oid, entr_org_id, subd_org_id, subdiv_id, matrix_typ, start_tms, end_tms, point_data_typ, point_amt_typ, point_curr_cde, matrix_nme, matrix_desc, meth_id, last_chg_tms, last_chg_usr_id, data_stat_typ, data_src_id, cal_id, orig_data_prov_id, subd_oid, mtty_oid\nFROM edm_881_gc.ft_t_mtrx\nWHERE last_chg_usr_id LIKE '${search_condition}';\"",
+          "result_file" : "$a_ft_t_mtrx",
+          "search_condition" : "$search_condition",
+          "hibernate_configuration_file" : "$hibernate_configuration_file",
+          "resultset_as_variables" : "\"json\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "title" : "Operations_Audit_MTRX_table",
+      "documentationName" : "SQLExecutorJob"
+    },
+    "Operations_Audit_MTFD_table" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.db.SQLExecutorJob",
+        "arguments" : {
+          "command" : "\"SELECT mtfd_oid, mtrx_oid, start_tms, end_tms, tbl_id, col_nme, meth_id, prnt_mtfd_oid, fld_data_typ, fld_amt_typ, fld_curr_cde, matrix_fld_nme, matrix_fld_desc, last_chg_tms, last_chg_usr_id, data_stat_typ, data_src_id, axis_id, mtrx_dim_typ, addnl_prc_qual_typ, prc_qte_meth_typ\nFROM edm_881_gc.ft_t_mtfd\nWHERE last_chg_usr_id LIKE '${search_condition}';\"",
+          "result_file" : "$a_ft_t_mtfd",
+          "search_condition" : "$search_condition",
+          "hibernate_configuration_file" : "$hibernate_configuration_file",
+          "resultset_as_variables" : "\"json\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "title" : "Operations_Audit_MTFD_table",
+      "documentationName" : "SQLExecutorJob"
+    },
+    "Operations_Audit_MTFC_table" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.db.SQLExecutorJob",
+        "arguments" : {
+          "command" : "\"SELECT mtfc_oid, mtfd_oid, fld_dmn_seq, start_tms, end_tms, fld_tenor_typ, fld_val_dte, fld_val_tms, fld_val_txt, fld_val_camt, fld_val_num, fld_val_crte, fld_val_cpct, last_chg_tms, last_chg_usr_id, data_stat_typ, data_src_id\nFROM edm_881_gc.ft_t_mtfc\nWHERE last_chg_usr_id LIKE '${search_condition}';\"",
+          "result_file" : "$a_ft_t_mtfc",
+          "search_condition" : "$search_condition",
+          "hibernate_configuration_file" : "$hibernate_configuration_file",
+          "resultset_as_variables" : "\"json\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "title" : "Operations_Audit_MTFC_table",
+      "documentationName" : "SQLExecutorJob"
+    },
+    "Operations_Send_Audit_Report_Revert_Configuration" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "ShellScriptExecutable",
+        "script" : "cd /edmfs/transfers/audit/config\nsed -i 's/'\"${DatabaseOwner_Password}\"'/dbpassword/g' hibernate.cfg.xml",
+        "v1Compatible" : false
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "jobResourceNames" : [ "C_JR_Common" ],
+      "title" : "Operations_Send_Audit_Report_Revert_Configuration",
+      "notification" : {
+        "types" : [ "ERROR", "WARNING" ],
+        "mail" : {
+          "to" : "mdrplussupport@commerzbank.com",
+          "cc" : "afa55d54.Commerzbank.onmicrosoft.com@emea.teams.ms"
+        }
+      }
+    },
+    "Operations_Send_Audit_Report_Prepare_Email" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "ShellScriptExecutable",
+        "script" : "prepare_email() {\n    auf=\"$1\"\n    echo \" \"\n    echo \"=================================================================================================\"\n    echo \"Preparing Email for Sending\"\n    echo \"=================================================================================================\"\n    # get current date\n    d=$(date +%Y%m%d)\n\n    # get year\n\n    yyyy=\"${d:0:4}\"\n\n    #get month\n\n    mm=\"${d:4:2}\"\n    \n    #get date\n    \n    dd=\"${d:6:2}\"\n    \n    # Create file name prefix\n    search_pattern=\"*.json\"\n    archive_name=\"AuditFiles_${yyyy}-${mm}-${dd}.zip\"\n    datum=\"${dd}.${mm}.${yyyy}\"\n    \n    echo ${att_name_prefix}\n    \n    # set source folder\n    source_folder=\"${auf}\"\n    \n    echo \"Searching for [ ${search_pattern} ] in the folder ${source_folder}\"\n    \n    if  test $(find \"${source_folder}\" -type f -name \"${search_pattern}\" | wc -c) -gt 0; then\n        found_file=1\n        cd ${source_folder}\n        echo \"found=1\" >> $JS7_RETURN_VALUES\n        #files=$(find \"${source_folder}\" -type f -name \"${search_pattern}\")\n        files=$(find \"${source_folder}\" -type f -name \"${search_pattern}\" -exec sed -n '/^\\[ \\]/!F;q' {} \\;)\n        zip -j ${archive_name} ${files}\n        file_path=\"${source_folder}/${archive_name}\"\n        echo \"Attachment: ${file_path}\"\n        echo \"Found: ${found_file}\"\n\t\techo \"f_f=${found}\" >> $JS7_RETURN_VALUES\n\t\techo \"Attachment file: ${source_folder}/${archive_name}\"\n        echo \"att=${source_folder}/${archive_name}\" >> $JS7_RETURN_VALUES\n        subject=\"Audit files for ${dd}.${mm}.${yyyy}\"\n        echo \"Subject: ${subject}\"\n        echo \"sub=${subject}\" >> $JS7_RETURN_VALUES\n\t\texit 5\n    else\n        echo \"[${search_pattern}] files not found in the folder ${source_folder}\"\n    fi\n\t\n\techo \"=================================================================================================\"\n\techo \"End of preparation job\"\n\techo \"=================================================================================================\"\n}\n\nprepare_email $audit_folder",
+        "env" : {
+          "audit_folder" : "$a_f"
+        },
+        "v1Compatible" : false,
+        "returnCodeMeaning" : {
+          "success" : [ 0, 5 ]
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "jobResourceNames" : [ "C_JR_Common" ],
+      "title" : "Operations_Send_Audit_Report_Prepare_Email",
+      "notification" : {
+        "types" : [ "ERROR", "WARNING" ],
+        "mail" : {
+          "to" : "mdrplussupport@commerzbank.com",
+          "cc" : "afa55d54.Commerzbank.onmicrosoft.com@emea.teams.ms"
+        }
+      }
+    },
+    "Operations_Send_Audit_Report_Send_Email" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.mail.MailJob",
+        "arguments" : {
+          "to" : "\"richard.crapnell@commerzbank.com;filip.goldman@commerzbank.com;viktoryia.harshunova@commerzbank.com\"",
+          "mail.smtp.host" : "\"mrelay.zit.commerzbank.com\"",
+          "from" : "\"mdrplussupport@commerzbank.com\"",
+          "attachment" : "$att",
+          "content_type" : "\"text/html\"",
+          "body" : "\"Dear colleagues,<br />Please find attached ${sub}.<br /><br />\\n<hr size=1 width=\\\"100%\\\" noshade style='color:#FFC000' align=left>\\nBest regards,<br />\\n<strong>MDR+ DevOps Team</strong><br /><br />\\n<i><small>This email is automatically generated and sent by MDR+ job scheduler.<br />\\nIf you do not want to receive it please request from <a href=\\\"mailto:mdrplussupport@commerzbank.com\\\"><span style='color:#0563C1'>MDR+ DevOps Team</span></a> to remove you from the list of receipients.<small></i>\\n\"",
+          "subject" : "$sub",
+          "cc" : "\"mdrplussupport@commerzbank.com\"",
+          "mail.smtp.starttls.enable" : "true",
+          "mail.smtp.ssl.enable" : "false",
+          "mail.smtp.ssl.protocols" : "\"TLSv1.2\"",
+          "mail.smtp.port" : "25",
+          "mail.smtp.ssl.trust" : "\"*\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "jobResourceNames" : [ "C_JR_Common" ],
+      "title" : "Operations_Send_Audit_Report_Send_Email",
+      "documentationName" : "MailJob",
+      "notification" : {
+        "types" : [ "ERROR", "WARNING" ],
+        "mail" : {
+          "to" : "mdrplussupport@commerzbank.com",
+          "cc" : "afa55d54.Commerzbank.onmicrosoft.com@emea.teams.ms"
+        }
+      }
+    },
+    "Operations_Send_Audit_Report_Send_End_Email" : {
+      "agentName" : "JSAgent",
+      "withSubagentClusterIdExpr" : false,
+      "executable" : {
+        "TYPE" : "InternalExecutable",
+        "className" : "com.sos.jitl.jobs.mail.MailJob",
+        "arguments" : {
+          "to" : "\"12f1ed54.Commerzbank.onmicrosoft.com@emea.teams.ms\"",
+          "mail.smtp.host" : "\"mrelay.zit.commerzbank.com\"",
+          "subject" : "\"Audit Report Status: DONE\"",
+          "body" : "\"Audit Report Tasks have been completed.\"",
+          "from" : "\"nikica.grgic@commerzbank.com\"",
+          "cc" : "\"afa55d54.Commerzbank.onmicrosoft.com@emea.teams.ms\"",
+          "mail.smtp.starttls.enable" : "true",
+          "mail.smtp.ssl.enable" : "false",
+          "mail.smtp.ssl.protocols" : "\"TLSv1.2\"",
+          "mail.smtp.port" : "25",
+          "mail.smtp.ssl.trust" : "\"*\""
+        }
+      },
+      "skipIfNoAdmissionForOrderDay" : false,
+      "parallelism" : 1,
+      "graceTimeout" : 15,
+      "failOnErrWritten" : false,
+      "warnOnErrWritten" : false,
+      "jobResourceNames" : [ "C_JR_Common" ],
+      "title" : "Operations_Send_Audit_Report_Send_End_Email",
+      "documentationName" : "MailJob",
+      "notification" : {
+        "types" : [ "ERROR", "WARNING" ],
+        "mail" : {
+          "to" : "mdrplussupport@commerzbank.com",
+          "cc" : "afa55d54.Commerzbank.onmicrosoft.com@emea.teams.ms"
+        }
+      }
+    }
+  }
+}
