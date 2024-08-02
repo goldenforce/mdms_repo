@@ -1,0 +1,38 @@
+pipeline{
+    agent {
+        node {
+            label "${labelSelect}"
+        }
+    }
+    stages {
+		stage('Checkout code') {
+		  steps {
+			script {
+			  // Checkout the repository and save the resulting metadata
+			  checkout([
+					$class: 'GitSCM', 
+					branches: [[name: "*/${branch_name}"]], 
+					doGenerateSubmoduleConfigurations: false, 
+					extensions: [[$class: 'CleanCheckout']], 
+					submoduleCfg: [], 
+					userRemoteConfigs: [[credentialsId: '423a63a0-04a3-4e1c-806f-e7f41f0a9847', url: 'https://github.com/goldenforce/mdms_repo.git']]
+				])
+			}
+		  }
+		}
+        stage('Build and Push') {
+		  steps {
+             script {			    
+        			  sh '''
+        				cd /ext/app/Jenkins/workspace/GIT_MDMS/jobscheduler/PROD/2.5.1/Objects
+				        zip -r JS7Objects.zip . *
+						cp -rp /ext/app/Jenkins/workspace/GIT_MDMS/jobscheduler/PackageDescription.xml .
+						cp -rp /ext/app/Jenkins/workspace/GIT_MDMS/jobscheduler/ReleaseNotes.html .
+						zip -r JS7Objects_${js_version}_${branch_name}.zip JS7Objects.zip PackageDescription.xml ReleaseNotes.html
+						curl -sSf -X PUT -T JS7Objects_${js_version}_${branch_name}.zip "http://ingsrepo:8082/artifactory/Dev/cloud/test/JS7Objects_${js_version}_${branch_name}.zip" -u "admin:P@ssw0rd1" 
+        			   '''
+        	}
+        }
+	}
+	}
+}
