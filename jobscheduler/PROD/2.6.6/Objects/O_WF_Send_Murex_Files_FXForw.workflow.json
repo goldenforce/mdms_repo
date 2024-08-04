@@ -16,7 +16,7 @@
   "instructions" : [ {
     "TYPE" : "Execute.Named",
     "jobName" : "Operations_CheckAndPrepare_Murex_Out_FxForwards",
-    "label" : "O_JB_Send_MOF"
+    "label" : "O_JB_Send_MOF1"
   }, {
     "TYPE" : "If",
     "predicate" : "$returnCode == 5",
