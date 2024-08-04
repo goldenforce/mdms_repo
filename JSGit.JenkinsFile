@@ -21,6 +21,7 @@ pipeline{
 		  }
 		}
         stage('Build and Push') {
+		when { expression { "${buildPackage}" == 'true' } }
 		  steps {
              script {			    
         			  sh '''
@@ -31,8 +32,24 @@ pipeline{
 						zip -r js_${branch_name}.zip jsObjects.zip PackageDescription.xml ReleaseNotes.html
 						curl -sSf -X PUT -T js_${branch_name}.zip "http://ingsrepo:8082/artifactory/Dev/cloud/jobs/js_${branch_name}.zip" -u "admin:P@ssw0rd1" 
         			   '''
-        	}
-        }
-	}
+				}
+			}
+		}
+        stage('Deploy Package') {
+		when { expression { "${deployPackage}" == 'true' } }
+		  steps {
+             script {			    
+        			  sh '''
+						cd /ext/app/Jenkins/workspace/GIT_MDMS/
+        				curl -X GET http://ingsrepo:8082/artifactory/Dev/cloud/eib/GEM.zip -H 'Content-Type:application/octet-stream' -o GEM.zip -u "admin:P@ssw0rd1"
+				        unzip GEM.zip
+						rm -rf /ext/app/Jenkins/workspace/GIT_MDMS/GEM.zip
+						curl -X GET http://ingsrepo:8082/artifactory/Dev/cloud/jobs/js_${branch_name}.zip -H 'Content-Type:application/octet-stream' -o GEM/custom/packages/js_${branch_name}.zip -u "admin:P@ssw0rd1"
+						chmod -R 755 /ext/app/Jenkins/workspace/GIT_MDMS/GEM/
+						/ext/app/Jenkins/workspace/GIT_MDMS/GEM/bin/jobscheduler/commandLines/linux/GEMJS.sh
+        			   '''
+				}
+			}
+		}		
 	}
 }
