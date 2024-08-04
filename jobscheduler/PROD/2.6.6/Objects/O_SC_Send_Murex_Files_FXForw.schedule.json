@@ -8,7 +8,7 @@
     "calendarName" : "O_CL_Send_Murex_Files_FXForw",
     "timeZone" : "Europe/Belgrade",
     "periods" : [ {
-      "singleStart" : "14:40:00",
+      "singleStart" : "11:30:00",
       "whenHoliday" : "SUPPRESS"
     } ]
   } ],
