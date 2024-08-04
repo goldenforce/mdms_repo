@@ -16,7 +16,7 @@
   "instructions" : [ {
     "TYPE" : "Execute.Named",
     "jobName" : "Operations_CheckAndPrepare_Murex_Out_FxForwards",
-    "label" : "O_JB_Send_MOF2"
+    "label" : "O_JB_Send_MOF3"
   }, {
     "TYPE" : "If",
     "predicate" : "$returnCode == 5",
@@ -89,7 +89,7 @@
       "title" : "Operations_Send_Murex_Out_FxForwards",
       "documentationName" : "MailJob",
       "notification" : {
-        "types" : [ "ERROR", "WARNING", "FATAL" ],
+        "types" : [ "ERROR", "WARNING" ],
         "mail" : {
           "to" : "mdrplussupport@commerzbank.com",
           "cc" : "afa55d54.Commerzbank.onmicrosoft.com@emea.teams.ms"
