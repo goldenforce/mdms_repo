@@ -89,7 +89,7 @@
       "title" : "Operations_Send_Murex_Out_FxForwards",
       "documentationName" : "MailJob",
       "notification" : {
-        "types" : [ "ERROR", "WARNING" ],
+        "types" : [ "ERROR", "WARNING", "FATAL" ],
         "mail" : {
           "to" : "mdrplussupport@commerzbank.com",
           "cc" : "afa55d54.Commerzbank.onmicrosoft.com@emea.teams.ms"
