@@ -25,11 +25,11 @@ pipeline{
              script {			    
         			  sh '''
         				cd /ext/app/Jenkins/workspace/GIT_MDMS/jobscheduler/PROD/2.5.1/Objects
-				        zip -r JS7Objects.zip . *
+				        zip -r jsObjects.zip . *
 						cp -rp /ext/app/Jenkins/workspace/GIT_MDMS/jobscheduler/PackageDescription.xml .
 						cp -rp /ext/app/Jenkins/workspace/GIT_MDMS/jobscheduler/ReleaseNotes.html .
-						zip -r JS7Objects_${js_version}_${branch_name}.zip JS7Objects.zip PackageDescription.xml ReleaseNotes.html
-						curl -sSf -X PUT -T JS7Objects_${js_version}_${branch_name}.zip "http://ingsrepo:8082/artifactory/Dev/cloud/test/JS7Objects_${js_version}_${branch_name}.zip" -u "admin:P@ssw0rd1" 
+						zip -r js_${branch_name}.zip jsObjects.zip PackageDescription.xml ReleaseNotes.html
+						curl -sSf -X PUT -T js_${branch_name}.zip "http://ingsrepo:8082/artifactory/Dev/cloud/jobs/js_${branch_name}.zip" -u "admin:P@ssw0rd1" 
         			   '''
         	}
         }
