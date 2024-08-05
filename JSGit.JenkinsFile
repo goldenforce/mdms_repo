@@ -1,7 +1,7 @@
 pipeline{
     agent {
         node {
-            label "${labelSelect}"
+            label "app_indev99"
         }
     }
     environment {
@@ -10,36 +10,6 @@ pipeline{
         JS7_URL="https://inodcent01:4446"
   		}	
     stages {
-		stage('Checkout code') {
-		  steps {
-			script {
-			  // Checkout the repository and save the resulting metadata
-			  checkout([
-					$class: 'GitSCM', 
-					branches: [[name: "*/${branch_name}"]], 
-					doGenerateSubmoduleConfigurations: false, 
-					extensions: [[$class: 'CleanCheckout']], 
-					submoduleCfg: [], 
-					userRemoteConfigs: [[credentialsId: '423a63a0-04a3-4e1c-806f-e7f41f0a9847', url: 'https://github.com/goldenforce/mdms_repo.git']]
-				])
-			}
-		  }
-		}
-        stage('Build and Push') {
-		when { expression { "${buildPackage}" == 'true' } }
-		  steps {
-             script {			    
-        			  sh '''
-        				cd /ext/app/Jenkins/workspace/GIT_MDMS/jobscheduler/PROD/${js_version}/Objects
-				        zip -r jsObjects.zip . *
-						cp -rp /ext/app/Jenkins/workspace/GIT_MDMS/jobscheduler/PackageDescription.xml .
-						cp -rp /ext/app/Jenkins/workspace/GIT_MDMS/jobscheduler/ReleaseNotes.html .
-						zip -r js_${branch_name}.zip jsObjects.zip PackageDescription.xml ReleaseNotes.html
-						curl -sSf -X PUT -T js_${branch_name}.zip "http://ingsrepo:8082/artifactory/Dev/cloud/jobs/js_${branch_name}.zip" -u "admin:P@ssw0rd1" 
-        			   '''
-				}
-			}
-		}
         stage('Deploy Package') {
 		when { expression { "${deployPackage}" == 'true' } }
 		  steps {
