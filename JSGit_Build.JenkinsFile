@@ -16,7 +16,7 @@ pipeline{
 			  // Checkout the repository and save the resulting metadata
 			  checkout([
 					$class: 'GitSCM', 
-					branches: [[name: "*/${branch_name}"]], 
+					branches: [[name: "*/${Branch_Name}"]], 
 					doGenerateSubmoduleConfigurations: false, 
 					extensions: [[$class: 'CleanCheckout']], 
 					submoduleCfg: [], 
@@ -33,8 +33,8 @@ pipeline{
 				        zip -r jsObjects.zip . *
 						cp -rp /ext/app/Jenkins/workspace/JobScheduler_Artifacts_Build/jobscheduler/PackageDescription.xml .
 						cp -rp /ext/app/Jenkins/workspace/JobScheduler_Artifacts_Build/jobscheduler/ReleaseNotes.html .
-						zip -r js_${Target_Milestone}.zip jsObjects.zip PackageDescription.xml ReleaseNotes.html
-						curl -sSf -X PUT -T js_${Target_Milestone}.zip "http://ingsrepo:8082/artifactory/Dev/cloud/jobs/js_${Target_Milestone}.zip" -u "admin:P@ssw0rd1" 
+						zip -r js_${Release_Version}.zip jsObjects.zip PackageDescription.xml ReleaseNotes.html
+						curl -sSf -X PUT -T js_${Release_Version}.zip "http://ingsrepo:8082/artifactory/Dev/cloud/jobs/js_${Release_Version}.zip" -u "admin:P@ssw0rd1" 
         			   '''
 				}
 			}
