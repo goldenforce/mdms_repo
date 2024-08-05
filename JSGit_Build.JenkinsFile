@@ -25,7 +25,7 @@ pipeline{
 			}
 		  }
 		}
-/*        stage('Build and Push') {
+        stage('Build and Push') {
 		  steps {
              script {			    
         			  sh '''
@@ -38,6 +38,6 @@ pipeline{
         			   '''
 				}
 			}
-		}	*/			
+		}			
 	}
 }
