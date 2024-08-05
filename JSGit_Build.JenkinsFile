@@ -34,7 +34,7 @@ pipeline{
 						cp -rp /ext/app/Jenkins/workspace/JobScheduler_Artifacts_Build/jobscheduler/PackageDescription.xml .
 						cp -rp /ext/app/Jenkins/workspace/JobScheduler_Artifacts_Build/jobscheduler/ReleaseNotes.html .
 						zip -r js_${branch_name}.zip jsObjects.zip PackageDescription.xml ReleaseNotes.html
-						curl -sSf -X PUT -T js_${branch_name}.zip "http://ingsrepo:8082/artifactory/Dev/cloud/jobs/js_${branch_name}.zip" -u "admin:P@ssw0rd1" 
+						curl -sSf -X PUT -T js_${branch_name}.zip "http://ingsrepo:8082/artifactory/Dev/cloud/jobs/js_${Target_Milestone}.zip" -u "admin:P@ssw0rd1" 
         			   '''
 				}
 			}
