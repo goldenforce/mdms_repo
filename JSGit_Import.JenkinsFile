@@ -22,7 +22,7 @@ pipeline{
 						cd GEM/custom/packages/
 						unzip js_${Release_Version}.zip
 						chmod -R 755 /ext/app/Jenkins/workspace/JobScheduler_Artifacts_Build/GEM/
-						/ext/app/Jenkins/workspace/JobScheduler_Artifacts_Build/GEM/bin/jobscheduler/commandLines/linux/executeJS.sh
+						/ext/app/Jenkins/workspace/JobScheduler_Artifacts_Build/GEM/bin/jobscheduler/commandLines/linux/executeJSImport.sh
         			   '''
 				}
 			}
