@@ -29,10 +29,10 @@ pipeline{
 		  steps {
              script {			    
         			  sh '''
-        				cd /ext/app/Jenkins/workspace/GIT_MDMS/jobscheduler/PROD/2.6.6/Objects
+        				cd /ext/app/Jenkins/workspace/JobScheduler_Artifacts_Build/jobscheduler/PROD/2.6.6/Objects
 				        zip -r jsObjects.zip . *
-						cp -rp /ext/app/Jenkins/workspace/GIT_MDMS/jobscheduler/PackageDescription.xml .
-						cp -rp /ext/app/Jenkins/workspace/GIT_MDMS/jobscheduler/ReleaseNotes.html .
+						cp -rp /ext/app/Jenkins/workspace/JobScheduler_Artifacts_Build/jobscheduler/PackageDescription.xml .
+						cp -rp /ext/app/Jenkins/workspace/JobScheduler_Artifacts_Build/jobscheduler/ReleaseNotes.html .
 						zip -r js_${branch_name}.zip jsObjects.zip PackageDescription.xml ReleaseNotes.html
 						curl -sSf -X PUT -T js_${branch_name}.zip "http://ingsrepo:8082/artifactory/Dev/cloud/jobs/js_${branch_name}.zip" -u "admin:P@ssw0rd1" 
         			   '''

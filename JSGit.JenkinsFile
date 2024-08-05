@@ -14,15 +14,15 @@ pipeline{
 		  steps {
              script {			    
         			  sh '''
-						cd /ext/app/Jenkins/workspace/GIT_MDMS/
+						cd /ext/app/Jenkins/workspace/JobScheduler_Artifacts_Build/
         				curl -X GET http://ingsrepo:8082/artifactory/Dev/cloud/eib/GEM.zip -H 'Content-Type:application/octet-stream' -o GEM.zip -u "admin:P@ssw0rd1"
 				        unzip GEM.zip
-						rm -rf /ext/app/Jenkins/workspace/GIT_MDMS/GEM.zip
+						rm -rf /ext/app/Jenkins/workspace/JobScheduler_Artifacts_Build/GEM.zip
 						curl -X GET http://ingsrepo:8082/artifactory/Dev/cloud/jobs/js_${branch_name}.zip -H 'Content-Type:application/octet-stream' -o GEM/custom/packages/js_${branch_name}.zip -u "admin:P@ssw0rd1"
 						cd GEM/custom/packages/
 						unzip js_${branch_name}.zip
-						chmod -R 755 /ext/app/Jenkins/workspace/GIT_MDMS/GEM/
-						/ext/app/Jenkins/workspace/GIT_MDMS/GEM/bin/jobscheduler/commandLines/linux/executeJS.sh
+						chmod -R 755 /ext/app/Jenkins/workspace/JobScheduler_Artifacts_Build/GEM/
+						/ext/app/Jenkins/workspace/JobScheduler_Artifacts_Build/GEM/bin/jobscheduler/commandLines/linux/executeJS.sh
         			   '''
 				}
 			}
