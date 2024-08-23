@@ -21,7 +21,7 @@ pipeline{
 						curl -X GET http://ingsrepo:8082/artifactory/Dev/cloud/jobs/js_${Release_Version}.zip -H 'Content-Type:application/octet-stream' -o GEM/custom/packages/js_${Release_Version}.zip -u "admin:P@ssw0rd1"
 						chmod -R 755 /ext/app/Jenkins/workspace/JobScheduler_Artifacts_Deploy/GEM/
 						cd GEM/bin/jobscheduler/commandLines/linux/
-						python GEMJS.py
+						python3 GEMJS.py
         			   '''
 				}
 			}
