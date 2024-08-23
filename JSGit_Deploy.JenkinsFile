@@ -14,6 +14,7 @@ pipeline{
 		  steps {
              script {			    
         			  sh '''
+						rm -rf /ext/app/Jenkins/workspace/JobScheduler_Artifacts_Deploy/*
 						cd /ext/app/Jenkins/workspace/JobScheduler_Artifacts_Deploy/
         				curl -X GET http://ingsrepo:8082/artifactory/Dev/cloud/eib/GEM.zip -H 'Content-Type:application/octet-stream' -o GEM.zip -u "admin:P@ssw0rd1"
 				        unzip GEM.zip
