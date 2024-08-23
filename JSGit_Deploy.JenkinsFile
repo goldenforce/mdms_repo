@@ -1,0 +1,31 @@
+pipeline{
+    agent {
+        node {
+            label "app_indev99"
+        }
+    }
+    environment {
+        JS7_REST_USER="root"
+        JS7_REST_PASS="root"
+        JS7_URL="https://inodcent01:4446"
+  		}	
+    stages {
+        stage('Deploy Package') {
+		  steps {
+             script {			    
+        			  sh '''
+						cd /ext/app/Jenkins/workspace/JobScheduler_Artifacts_Deploy/
+        				curl -X GET http://ingsrepo:8082/artifactory/Dev/cloud/eib/GEM.zip -H 'Content-Type:application/octet-stream' -o GEM.zip -u "admin:P@ssw0rd1"
+				        unzip GEM.zip
+						rm -rf /ext/app/Jenkins/workspace/JobScheduler_Artifacts_Build/GEM.zip
+						curl -X GET http://ingsrepo:8082/artifactory/Dev/cloud/jobs/js_${Release_Version}.zip -H 'Content-Type:application/octet-stream' -o GEM/custom/packages/js_${Release_Version}.zip -u "admin:P@ssw0rd1"
+						chmod -R 755 /ext/app/Jenkins/workspace/JobScheduler_Artifacts_Deploy/GEM/
+						cd /ext/app/Jenkins/workspace/JobScheduler_Artifacts_Deploy/GEM/
+						python 
+						/ext/app/Jenkins/workspace/JobScheduler_Artifacts_Build/GEM/bin/jobscheduler/commandLines/linux/executeJSImport.sh
+        			   '''
+				}
+			}
+		}				
+	}
+}
