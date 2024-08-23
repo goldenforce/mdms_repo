@@ -29,7 +29,7 @@ pipeline{
 		  steps {
              script {			    
         			  sh '''
-        				cd /ext/app/Jenkins/workspace/JobScheduler_Artifacts_Build/jobscheduler/PROD/2.6.6/Objectsy
+        				cd /ext/app/Jenkins/workspace/JobScheduler_Artifacts_Build/jobscheduler/PROD/2.6.6/Objects
 						cp -rp /ext/app/Jenkins/workspace/JobScheduler_Artifacts_Build/jobscheduler/meta_inf .
 				        zip -r jsObjects_${Release_Version}.zip . *
 						cp -rp /ext/app/Jenkins/workspace/JobScheduler_Artifacts_Build/jobscheduler/PackageDescription.xml .
