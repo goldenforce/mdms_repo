@@ -8,7 +8,7 @@
     "calendarName" : "O_CL_Send_Razor_Files",
     "timeZone" : "Europe/Belgrade",
     "periods" : [ {
-      "singleStart" : "17:46:00",
+      "singleStart" : "17:17:00",
       "whenHoliday" : "SUPPRESS"
     } ]
   } ],
